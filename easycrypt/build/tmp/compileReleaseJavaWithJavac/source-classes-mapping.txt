@@ -1,0 +1,6 @@
+com/pvryan/easycrypt/BuildConfig.java
+ com.pvryan.easycrypt.BuildConfig
+com/pvryan/easycrypt/PRNGFixes.java
+ com.pvryan.easycrypt.PRNGFixes
+ com.pvryan.easycrypt.PRNGFixes$LinuxPRNGSecureRandom
+ com.pvryan.easycrypt.PRNGFixes$LinuxPRNGSecureRandomProvider

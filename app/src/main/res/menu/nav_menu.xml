@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/encrypted"
+        android:icon="@drawable/lock_check"
+        android:title="@string/encrypted"
+        app:cnb_iconColor="@color/green_active"/>
+
+    <item
+        android:id="@+id/decrypted"
+        android:icon="@drawable/lock_open_remove"
+        android:title="@string/decrypted"
+        app:cnb_iconColor="@color/red_active"/>
+
+    <item
+        android:id="@+id/pass_analysis"
+        android:icon="@drawable/pencil_lock"
+        android:title="@string/analyzer"
+        app:cnb_iconColor="@color/ZenCryptSecondaryDark"/>
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/cog"
+        android:title="@string/settings"
+        app:cnb_iconColor="@color/blue_grey_active" />
+
+</menu>

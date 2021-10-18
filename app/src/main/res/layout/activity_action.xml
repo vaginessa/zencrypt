@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:animateLayoutChanges="true"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/indeterminate_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="0dp"
+                app:indicatorColor="@color/ZenCryptPrimary"
+                android:indeterminate="true"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:text="@string/loading" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/tv_file_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone"
+            android:padding="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/determinate_progress_layout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/determinateBar"
+                app:indicatorColor="@color/ZenCryptPrimary"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/determine_textView"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="8dp"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:hintTextColor="@color/ZenCryptPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="@color/ZenCryptPrimary"
+            app:passwordToggleTint="@color/ZenCryptPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:textColor="@color/ZenCryptPrimary"
+                android:text="@android:string/cancel" />
+
+            <Button
+                android:id="@+id/button_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:foreground="?selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:textColor="@color/ZenCryptPrimary"
+                android:text="@android:string/ok" />
+
+            <Button
+                android:id="@+id/button_use_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_anchor="@id/button_ok"
+                android:visibility="gone"
+                app:layout_anchorGravity="left"
+                android:layout_gravity="left"
+                android:foreground="?selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:textColor="@color/ZenCryptPrimary"
+                android:text="@string/password" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

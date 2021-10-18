@@ -1,0 +1,90 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+
+ext {
+    bintrayRepo = 'easycrypt'
+    bintrayName = 'easycrypt'
+
+    publishedGroupId = 'com.pvryan.easycrypt'
+    libraryName = 'EasyCrypt'
+    artifact = 'easycrypt'
+
+    libraryDescription = 'Easy to use, secure, and efficient Android cryptography library.'
+
+    siteUrl = 'https://github.com/pvasa/EasyCrypt'
+    gitIssues = 'https://github.com/pvasa/EasyCrypt/issues'
+    gitUrl = 'https://github.com/pvasa/EasyCrypt.git'
+    gitRepo = 'pvasa/EasyCrypt'
+
+    libraryVersion = '1.3.5'
+
+    developerId = 'pvasa'
+    developerName = 'Priyank Vasa'
+    developerEmail = 'pv.ryan14@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+/*apply from: 'https://raw.githubusercontent.com/pvasa/androidscripts/master/load-properties.gradle'*/
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"
+    implementation "com.nulab-inc:zxcvbn:${rootProject.ext.zxcvbn}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlin_version}"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+    enabled = false
+}
+
+/*apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/pvasa/androidscripts/master/bintray.gradle'*/

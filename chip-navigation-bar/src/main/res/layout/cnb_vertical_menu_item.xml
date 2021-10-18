@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_height="wrap_content"
+    tools:layout_width="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <LinearLayout
+        android:id="@+id/cbn_item_internal_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cnb_space_0"
+        android:layout_marginEnd="@dimen/cnb_space_2"
+        android:layout_marginBottom="@dimen/cnb_space_0"
+        android:duplicateParentState="true"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:padding="@dimen/cnb_space_2"
+        tools:background="#000"
+        tools:layout_width="200dp">
+
+        <com.ismaeldivita.chipnavigation.view.BadgeImageView
+            android:id="@+id/cnb_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cnb_space_2"
+            android:duplicateParentState="true"
+            tools:src="@android:drawable/btn_star_big_off"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/cbn_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/cnb_space_2"
+            android:layout_marginEnd="@dimen/cnb_space_0"
+            android:duplicateParentState="true"
+            android:singleLine="true"
+            tools:text="Discover"
+            tools:textColor="#FFF" />
+
+
+        <TextView
+            android:id="@+id/cbn_item_notification_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/cnb_space_0"
+            android:layout_weight="1"
+            android:duplicateParentState="true"
+            android:ellipsize="middle"
+            android:gravity="end"
+            android:singleLine="true"
+            android:textStyle="bold"
+            tools:text="123456789"
+            tools:textColor="#FFF" />
+
+    </LinearLayout>
+
+</merge>

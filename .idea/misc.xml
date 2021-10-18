@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.25625" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/alpha_z_circle.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/drawable/alpha_z_circle_black.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/archive_lock.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/cart_check.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/check_all.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/chevron_down.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/close_circle_multiple_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/close_circle_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/cog.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/delete_alert_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/file_remove_outline.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/file_remove_outline_white.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/gitlab.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/drawable/gradient_test.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/heart_multiple_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_alpha_z_circle.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_box_24.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_color_lens_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_double_arrow_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_fingerprint_24.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_list_bulleted_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_phone_android_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_style_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_supervisor_account_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_text_fields_24.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_textbox_password.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_touch_app_24.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_vibrate_24.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/info.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/info_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/info_outline_black.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/info_outline_check.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/info_variant.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/launcher_icon_foreground.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_check.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_minus_outline.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/lock_off.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/lock_open_minus_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_open_remove.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_plus_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/lock_reset.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/mail_at.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/pencil_lock.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/plus.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/plus_circle_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/plus_sector_multiple.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/round_corner_toggle.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_key_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_key_outline_white.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_lock_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_plus.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/shield_remove_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/star_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/test_title_logo.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/trash_can_outline.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/layout/activity_action.xml" value="0.3867753623188406" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2726449275362319" />
+        <entry key="app/src/main/res/layout/activity_pick_file.xml" value="0.4107789855072464" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.36367753623188404" />
+        <entry key="app/src/main/res/layout/decrypted_file_item_cardview.xml" value="0.4071557971014493" />
+        <entry key="app/src/main/res/layout/determinate_progress_horizontal.xml" value="0.4071557971014493" />
+        <entry key="app/src/main/res/layout/encrypted_file_item_cardview.xml" value="0.42083333333333334" />
+        <entry key="app/src/main/res/layout/fragment_decrypted_view.xml" value="0.4071557971014493" />
+        <entry key="app/src/main/res/layout/fragment_encrypted_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_password_analyzer.xml" value="0.4067028985507246" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.3944746376811594" />
+        <entry key="app/src/main/res/layout/indeterminate_progress_circular.xml" value="0.42083333333333334" />
+        <entry key="app/src/main/res/layout/layout_collapsed_view.xml" value="0.384963768115942" />
+        <entry key="app/src/main/res/layout/layout_expanded_view.xml" value="0.384963768115942" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.42083333333333334" />
+        <entry key="app/src/main/res/xml/resource_paths.xml" value="0.36367753623188404" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

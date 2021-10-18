@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        tools:ignore="RtlHardcoded"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!-- Your scrolling content -->
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_menu"
+                android:layout_marginBottom="56dp">
+                <!--android:layout_marginTop="?android:attr/actionBarSize"-->
+            </FrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_appbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:expandedTitleGravity="center"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:collapsedTitleTextAppearance="@style/CollapsedAppBar"
+                app:expandedTitleTextAppearance="@style/ExpandedAppBar">
+
+                <TextView
+                    android:id="@+id/page_nme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/ZenCryptPrimary"
+                    android:height="250dp"
+                    app:layout_collapseMode="parallax">
+                </TextView>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:title="ZenCrypt"
+                    app:logo="?attr/appBarTitleIcon"
+                    app:layout_anchor="@id/container"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    android:elevation="4dp"
+                    app:layout_scrollFlags="scroll|enterAlways">
+<!--                    <android.widget.Space
+                        android:id="@+id/circle_collapsed_target"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>-->
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+       <!-- <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/image_width"
+            android:layout_height="@dimen/image_width"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:layout_gravity="top|center_horizontal"
+            android:elevation="8dp"
+            android:src="@drawable/test_title_logo"
+            app:finalHeight="@dimen/image_final_width"
+            app:finalXPosition="@dimen/spacing_small"
+            app:finalYPosition="@dimen/spacing_small"
+            app:finalToolbarHeight="?attr/actionBarSize"
+            app:layout_behavior="com.zestas.cryptmyfiles.helpers.AvatarImageBehavior" />-->
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/navMenuColor"
+        android:elevation="16dp"
+        android:padding="8dp"
+        app:cnb_menuResource="@menu/nav_menu"
+        app:cnb_orientationMode="horizontal" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="10dp"
+        android:paddingBottom="58dp"
+        app:menu_labels_ellipsize="end"
+        app:menu_buttonSpacing="3dp"
+        app:menu_labels_singleLine="true"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_colorNormal="@color/ZenCryptPrimary"
+        app:menu_colorPressed="@color/ZenCryptPrimary"
+        app:menu_colorRipple="@color/ZenCryptFabActionRipple"
+        app:menu_labels_position="left"
+        app:menu_labels_textColor="?attr/fab_menu_labels_text_color"
+        app:menu_labels_colorNormal="?attr/fab_menu_labels_color"
+        app:menu_labels_colorRipple="@color/ZenCryptFabActionRipple"
+        app:menu_labels_colorPressed="?attr/fab_menu_labels_color">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_action_encrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lock_plus_outline"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/ZenCryptFabActionColor"
+            app:fab_colorPressed="@color/ZenCryptFabActionColor"
+            app:fab_colorRipple="@color/ZenCryptFabActionRipple"
+            app:fab_label="@string/encrypt_file" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_action_decrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lock_minus_outline"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/ZenCryptFabActionColor"
+            app:fab_colorPressed="@color/ZenCryptFabActionColor"
+            app:fab_colorRipple="@color/ZenCryptFabActionRipple"
+            app:fab_label="@string/decrypt_custom_file" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
