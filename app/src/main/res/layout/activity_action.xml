@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:gravity="center"
     android:animateLayoutChanges="true"
@@ -11,6 +12,20 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:textColor="@color/ZenCryptPrimary"
+            app:drawableTint="@color/ZenCryptPrimary"
+            android:drawablePadding="6dp"
+            android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:paddingStart="13dp"
+            android:paddingTop="15sp"
+            android:paddingBottom="2sp"
+            android:textSize="18sp"
+            android:layout_height="match_parent">
+        </TextView>
 
         <LinearLayout
             android:id="@+id/indeterminate_progress_layout"
@@ -34,25 +49,59 @@
                 android:text="@string/loading" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_file_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/file_name_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="gone"
-            android:textStyle="italic"
-            android:textSize="15sp"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
-            android:padding="8dp"/>
-        <TextView
-            android:id="@+id/tv_file_size"
-            android:layout_width="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:text="@string/file_name" />
+
+            <TextView
+                android:id="@+id/tv_file_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/file_size_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
             android:visibility="gone"
-            android:padding="8dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:text="@string/file_size" />
+
+            <TextView
+                android:id="@+id/tv_file_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:padding="8dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/determinate_progress_layout"
@@ -91,8 +140,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             app:passwordToggleEnabled="true"
             app:boxStrokeColor="@color/ZenCryptPrimary"
             app:passwordToggleTint="@color/ZenCryptPrimary">
@@ -107,44 +156,54 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foreground="?selectableItemBackground"
-                android:background="@android:color/transparent"
-                android:textColor="@color/ZenCryptPrimary"
-                android:text="@android:string/cancel" />
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_ok"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
                 android:textColor="@color/ZenCryptPrimary"
-                android:text="@android:string/ok" />
+                app:icon="@drawable/ic_baseline_fingerprint_24"
+                app:iconTint="@color/ZenCryptPrimary"
+                app:iconGravity="textStart"
+                android:text="@string/fingerprint" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_use_password"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_anchor="@id/button_ok"
-                android:visibility="gone"
-                app:layout_anchorGravity="left"
-                android:layout_gravity="left"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
                 android:textColor="@color/ZenCryptPrimary"
+                app:icon="@drawable/key_outline"
+                app:iconTint="@color/ZenCryptPrimary"
+                app:iconGravity="textStart"
                 android:text="@string/password" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_cancel"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/close"
+                app:iconTint="@color/red_active"
+                app:iconGravity="textStart"
+                android:foreground="?selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:textColor="@color/red_active"
+                android:text="@android:string/cancel" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

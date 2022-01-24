@@ -18,7 +18,6 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -38,7 +37,7 @@ import dev.skomlach.biometric.compat.BiometricApi
 import dev.skomlach.biometric.compat.BiometricAuthRequest
 import dev.skomlach.biometric.compat.BiometricPromptCompat
 import dev.skomlach.biometric.compat.BiometricType
-import dev.skomlach.biometric.compat.engine.AuthenticationFailureReason
+import dev.skomlach.biometric.compat.AuthenticationFailureReason
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -46,13 +45,16 @@ import java.io.File
 import java.io.FileNotFoundException
 
 class ActionActivity: AppCompatActivity(), ECResultListener {
+    private val layoutFileName by lazy { findViewById<LinearLayout>(R.id.file_name_layout) }
+    private val layoutFileSize by lazy { findViewById<LinearLayout>(R.id.file_size_layout) }
     private val tvFileName by lazy { findViewById<TextView>(R.id.tv_file_name) }
     private val tvFileSize by lazy { findViewById<TextView>(R.id.tv_file_size) }
+    private val tvTitle by lazy { findViewById<TextView>(R.id.tvTitle) }
     private val indeterminateProgressLayout by lazy { findViewById<LinearLayout>(R.id.indeterminate_progress_layout) }
     private val determinateProgressLayout by lazy { findViewById<LinearLayout>(R.id.determinate_progress_layout) }
     private val determineTextView by lazy { findViewById<TextView>(R.id.determine_textView) }
     private val buttonCancel by lazy { findViewById<Button>(R.id.button_cancel) }
-    private val buttonOk by lazy { findViewById<Button>(R.id.button_ok) }
+    private val buttonUseFingerprint by lazy { findViewById<Button>(R.id.button_ok) }
     private val buttonUsePassword by lazy { findViewById<Button>(R.id.button_use_password) }
     private val textInputLayout by lazy { findViewById<TextInputLayout>(R.id.textInputLayout) }
     private val tvPassword by lazy { findViewById<TextInputEditText>(R.id.tvPassword) }
@@ -69,22 +71,29 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
+            disableButtons()
             lifecycleScope.launch {
                 whenStarted {
                     dataUri = result.data?.data
                     withContext(Dispatchers.IO) {
                         resultName += dataUri?.getOriginalFileName(context)
-                        resultSize += formatFileSize(dataUri?.length(contentResolver)!!)
+                        val length = dataUri?.length(contentResolver)!!
+                        if (length == -1L) {
+                            SnackBarHelper.showSnackBarError(getString(R.string.this_file_manager_is_not_supported))
+                            finish()
+                        }
+                        resultSize += formatFileSize(length)
                     }
                 }
-                val finalName: String = getString(R.string.file_name) + ": " + resultName
-                val finalSize: String = getString(R.string.file_size) + ": " + resultSize
 
-                setFileTextViewNameAndSize(finalName, finalSize)
+                setFileTextViewNameAndSize(resultName, resultSize)
                 hideIndeterminateProgress()
-                hideFileTextViews()
+                showFileTextViews()
+                enableButtons()
             }
         }
+        else
+            finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,11 +104,13 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         intentAction = intent.extras?.getInt(ZenCryptConstants.ACTION_CODE)!!
         intentRequestCode = intent.extras?.getInt(ZenCryptConstants.REQUEST_CODE)!!
         intentReplaceCode = intent.extras?.getInt(ZenCryptConstants.REPLACE_CODE)!!
-        title = if (intentAction == ZenCryptConstants.ACTION_ENCRYPT) getString(R.string.encrypt) else getString(R.string.decrypt)
 
-        if (ZenCryptSettingsModel.fingerprint_auth.value) {
-            textInputLayout.visibility = GONE
-            buttonUsePassword.visibility = VISIBLE
+        initWindowTitle()
+
+        if ( !ZenCryptSettingsModel.isProUser.value ) {
+            buttonUseFingerprint.isEnabled = false
+            buttonUseFingerprint.alpha = 0.5f
+            buttonUseFingerprint.text = getString(R.string.fingerprint_pro)
         }
 
         initButtonListeners()
@@ -116,18 +127,16 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
                 dataUri = Uri.fromFile(file)
                 resultName = file.name
                 resultSize = formatFileSize(file.length())
-                val finalName: String = getString(R.string.file_name) + ": " + resultName
-                val finalSize: String = getString(R.string.file_size) + ": " + resultSize
 
-                setFileTextViewNameAndSize(finalName, finalSize)
+                setFileTextViewNameAndSize(resultName, resultSize)
                 hideIndeterminateProgress()
-                hideFileTextViews()
+                showFileTextViews()
             }
         }
     }
 
     private fun selectFile() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "*/*"
         startForResult.launch(intent)
@@ -138,20 +147,41 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
             finish()
         }
 
-        buttonOk.setOnClickListener {
-            if ( ZenCryptSettingsModel.fingerprint_auth.value && !textInputLayout.isVisible )
+        buttonUseFingerprint.setOnClickListener {
+            if ( ZenCryptSettingsModel.fingerprint_auth.value )
                 startFingerprintAuth()
             else
-                startZenCryptAction()
+                SnackBarHelper.showSnackBarInfo(getString(R.string.fingerprint_is_not_enabled), this)
         }
 
         buttonUsePassword.setOnClickListener {
-            textInputLayout.visibility = if (textInputLayout.isVisible) GONE else VISIBLE
+            startZenCryptAction()
         }
     }
 
-    private fun startZenCryptAction() {
-        val pass: String = if ( ZenCryptSettingsModel.fingerprint_auth.value && !textInputLayout.isVisible )
+    private fun initWindowTitle() {
+        if ( intentAction == ZenCryptConstants.ACTION_ENCRYPT ) {
+            tvTitle.text = getString(R.string.encrypt)
+            tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                R.drawable.lock_plus_outline,
+                0,
+                0,
+                0
+            )
+        }
+        else {
+            tvTitle.text = getString(R.string.decrypt)
+            tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                R.drawable.lock_minus_outline,
+                0,
+                0,
+                0
+            )
+        }
+    }
+
+    private fun startZenCryptAction(fingerprint: Boolean = false) {
+        val pass: String = if ( fingerprint )
             ZenCryptSettingsModel.custom_pass_hash.value
         else
             tvPassword.text.toString().trim()
@@ -185,7 +215,12 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         if (outputFile.exists())
             outputFile.delete()
 
-        eCryptSymmetric.encrypt(fis, pass, this, outputFile)
+        try {
+            eCryptSymmetric.encrypt(fis, pass, this, outputFile)
+        } catch (e: FileNotFoundException) {
+            enableButtons()
+            SnackBarHelper.showSnackBarError("FileNotFoundException!",this)
+        }
     }
 
     private fun startDecrypting(pass: String) {
@@ -197,7 +232,7 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
                 File.separator +
                 resultName
 
-        //IMPORTANT: two or more dots. (file.jpg.zen -> file.zen, but file.jpg -> file.jpg)
+        //IMPORTANT: two or more dots. (file.jpg.zen -> file.jpg, but file.jpg -> file.jpg)
         if (filePath.matches(".*\\..*\\..*".toRegex()))
             filePath = filePath.substring(0, filePath.lastIndexOf('.'))
 
@@ -205,7 +240,12 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         if (outputFile.exists())
             outputFile.delete()
 
-        eCryptSymmetric.decrypt(fis, pass, this, outputFile)
+        try {
+            eCryptSymmetric.decrypt(fis, pass, this, outputFile)
+        } catch (e: FileNotFoundException) {
+            enableButtons()
+            SnackBarHelper.showSnackBarError("FileNotFoundException!",this)
+        }
     }
 
     override fun <T> onSuccess(result: T) {
@@ -248,10 +288,11 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     }
 
     override fun onFailure(message: String, e: Exception) {
-        val errorMessage = getString(R.string.maybe_wrong_password) + " (Error: $message)"
-        SnackBarHelper.showSnackBarError(errorMessage,this)
-        enableButtons()
+        val errorMessage = getString(R.string.maybe_wrong_password)
+        println("ERROR: $message")
+        SnackBarHelper.showSnackBarError(errorMessage)
         if (ZenCryptSettingsModel.vibration.value) vibrate()
+        finish()
     }
 
     private fun startFingerprintAuth() {
@@ -261,20 +302,20 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         )
             .setTitle(if (intentAction == ZenCryptConstants.ACTION_ENCRYPT) getString(R.string.encrypt) else getString(R.string.decrypt))
             .setSubtitle(resultName)
+            .setEnabledNotification(false)
             .setNegativeButton(getString(android.R.string.cancel), null)
             .build()
 
-        biometricPromptCompat.authenticate(object : BiometricPromptCompat.Result {
+        biometricPromptCompat.authenticate(object : BiometricPromptCompat.AuthenticationCallback() {
             override fun onSucceeded(confirmed : Set<BiometricType>) {
-                startZenCryptAction()
+                startZenCryptAction(fingerprint = true)
             }
 
             override fun onCanceled() {
-                enableButtons()
+                //do nothing
             }
 
             override fun onFailed(reason: AuthenticationFailureReason?) {
-                enableButtons()
                 SnackBarHelper.showSnackBarError("Error : $reason", this@ActionActivity)
                 if (ZenCryptSettingsModel.vibration.value) vibrate()
             }
@@ -291,14 +332,22 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
 
     private fun disableButtons() {
         buttonCancel.isEnabled = false
-        buttonOk.isEnabled = false
+        buttonCancel.alpha = 0.5f
+        buttonUseFingerprint.isEnabled = false
+        buttonUseFingerprint.alpha = 0.5f
         buttonUsePassword.isEnabled = false
+        buttonUsePassword.alpha = 0.5f
     }
 
     private fun enableButtons() {
         buttonCancel.isEnabled = true
-        buttonOk.isEnabled = true
+        buttonCancel.alpha = 1.0f
+        if ( ZenCryptSettingsModel.isProUser.value ) {
+            buttonUseFingerprint.isEnabled = true
+            buttonUseFingerprint.alpha = 1.0f
+        }
         buttonUsePassword.isEnabled = true
+        buttonUsePassword.alpha = 1.0f
     }
 
     private fun setFileTextViewNameAndSize(name: String, size: String) {
@@ -314,9 +363,9 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         indeterminateProgressLayout.visibility = GONE
     }
 
-    private fun hideFileTextViews() {
-        tvFileName.visibility = VISIBLE
-        tvFileSize.visibility = VISIBLE
+    private fun showFileTextViews() {
+        layoutFileName.visibility = VISIBLE
+        layoutFileSize.visibility = VISIBLE
     }
 
     private fun hidePasswordLayout() {

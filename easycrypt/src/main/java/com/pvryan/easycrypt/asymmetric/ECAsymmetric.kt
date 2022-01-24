@@ -172,7 +172,7 @@ class ECAsymmetric {
     }
 
     /**
-     * Signs the input data using provided RSA private key (SHA512withRSA algorithm)
+     * Signs the input data using provided RSA private key_outline.xml (SHA512withRSA algorithm)
      * and posts response to [ECResultListener.onSuccess] if successful or
      * posts error to [ECResultListener.onFailure] if failed.
      * Signing progress is posted to [ECResultListener.onProgress].
@@ -217,7 +217,7 @@ class ECAsymmetric {
     }
 
     /**
-     * Verifies the input data using provided RSA public key (SHA512withRSA algorithm)
+     * Verifies the input data using provided RSA public key_outline.xml (SHA512withRSA algorithm)
      * and posts response to [ECVerifiedListener.onSuccess] if successful or
      * posts error to [ECVerifiedListener.onFailure] if error.
      * Verification progress is posted to [ECVerifiedListener.onProgress].
@@ -264,7 +264,7 @@ class ECAsymmetric {
     }
 
     /**
-     * Key sizes that can be used for generating RSA key pairs
+     * Key sizes that can be used for generating RSA key_outline.xml pairs
      */
     enum class KeySizes(val value: Int) {
         S_2048(2048),

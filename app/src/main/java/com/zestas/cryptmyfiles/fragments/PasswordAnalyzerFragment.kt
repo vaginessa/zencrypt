@@ -6,35 +6,18 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.pvryan.easycrypt.ECKeys
 import com.pvryan.easycrypt.symmetric.ECPasswordAnalyzer
 import com.zestas.cryptmyfiles.R
-import com.zestas.cryptmyfiles.databinding.FragmentEncryptedViewBinding
 import com.zestas.cryptmyfiles.databinding.FragmentPasswordAnalyzerBinding
 import java.util.*
 
 class PasswordAnalyzerFragment : Fragment(R.layout.fragment_password_analyzer) {
     private val binding by viewBinding(FragmentPasswordAnalyzerBinding::bind)
-
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = FragmentPasswordAnalyzerBinding.inflate(layoutInflater)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_password_analyzer, container, false)
-
-        return binding.root
-    }*/
+    private val eCPasswords = ECKeys()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +28,10 @@ class PasswordAnalyzerFragment : Fragment(R.layout.fragment_password_analyzer) {
             override fun afterTextChanged(newText: Editable?) {
 
                 newText?.toString()?.let {
+                    if ( it.isEmpty() ) {
+                        clearTextViews()
+                        return
+                    }
                     val analysis = ECPasswordAnalyzer.analyze(it)
                     val animation = ObjectAnimator.ofInt(
                         binding.progressBarP, "progress",
@@ -64,7 +51,11 @@ class PasswordAnalyzerFragment : Fragment(R.layout.fragment_password_analyzer) {
                         Locale.CANADA, "%.4f",
                         analysis.crackTimeSeconds.offlineFastHashing1e10PerSecond) +
                             " secs" + " (" + analysis.crackTimesDisplay.offlineFastHashing1e10PerSecond + ")"
-                    binding.tvWarning.text = analysis.feedback.warning
+                    val warning = analysis.feedback.warning
+                    if (warning.isNotEmpty())
+                        binding.tvWarning.text = warning
+                    else
+                        binding.tvWarning.text = getString(R.string.no_warning)
                 }
             }
 
@@ -72,5 +63,26 @@ class PasswordAnalyzerFragment : Fragment(R.layout.fragment_password_analyzer) {
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
+
+        binding.btnGeneratePassword.setOnClickListener {
+            val symbols = "!#\$%&()*+.0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{}"
+            binding.edPasswordP.setText(eCPasswords.genSecureRandomPassword(12, symbols.toCharArray()))
+/*            try {
+                binding.edPasswordP.setText(eCPasswords.genSecureRandomPassword(12, symbols.toCharArray()))
+            } catch (e: InvalidParameterException) {
+                SnackBarHelper.showSnackBarError("Something went wrong.")
+            } catch (e: NumberFormatException) {
+                SnackBarHelper.showSnackBarError("Number too big.")
+            }*/
+        }
+    }
+
+    private fun clearTextViews() {
+        binding.tvGuesses.text = ""
+        binding.tvGuessesLog10.text = ""
+        binding.tvCalcTime.text = ""
+        binding.tvOnlineBFTime.text = ""
+        binding.tvOfflineBFTime.text = ""
+        binding.tvWarning.text = ""
     }
 }

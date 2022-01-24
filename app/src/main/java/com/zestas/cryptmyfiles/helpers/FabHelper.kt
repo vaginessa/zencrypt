@@ -2,12 +2,14 @@ package com.zestas.cryptmyfiles.helpers
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.activities.ActionActivity
 import com.zestas.cryptmyfiles.constants.ZenCryptConstants
+import kotlinx.coroutines.delay
 
 class FabHelper {
     companion object {
@@ -31,6 +33,10 @@ class FabHelper {
                 intent.putExtra(ZenCryptConstants.REPLACE_CODE, if (bottomMenuSelectedId == R.id.encrypted)
                     ZenCryptConstants.REPLACE_WITH_ENCRYPTED else ZenCryptConstants.REPLACE_WITH_DECRYPTED)
                 activity.startActivity(intent)
+                activity.lifecycleScope.launchWhenStarted {
+                    delay(550)
+                    fabMenu.close(false)
+                }
             }
 
             fabActionDecrypt.setOnClickListener {
@@ -41,6 +47,10 @@ class FabHelper {
                 intent.putExtra(ZenCryptConstants.REPLACE_CODE, if (bottomMenuSelectedId == R.id.encrypted)
                     ZenCryptConstants.REPLACE_WITH_ENCRYPTED else ZenCryptConstants.REPLACE_WITH_DECRYPTED)
                 activity.startActivity(intent)
+                activity.lifecycleScope.launchWhenStarted {
+                    delay(550)
+                    fabMenu.close(false)
+                }
             }
         }
 

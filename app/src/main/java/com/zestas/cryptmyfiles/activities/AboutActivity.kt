@@ -21,7 +21,7 @@ class AboutActivity : LibsActivity() {
             .withAboutIconShown(true)
             .withAboutVersionShown(true)
             .withAboutVersionShownCode(true)
-            .withAboutAppName("ZenCrypt - Securely Encrypt Files")
+            .withAboutAppName("ZenCrypt - Securely Encrypt")
             .withAboutDescription(getString(R.string.zencrypt_description))
             .withAboutSpecial1("changelog")
             .withAboutSpecial1Description(getString(R.string.zencrypt_changelog))

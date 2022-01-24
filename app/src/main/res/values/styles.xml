@@ -24,6 +24,7 @@
     <attr name="appBarTextColor" format="reference"/>
     <attr name="appBarTitleIcon" format="reference"/>
 
+    <attr name="chevron_drawable" format="reference"/>
 
     <attr name="encrypted_file_drawable" format="reference"/>
     <attr name="decrypted_file_drawable" format="reference"/>

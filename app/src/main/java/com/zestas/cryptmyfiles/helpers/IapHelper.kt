@@ -10,6 +10,7 @@ import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
 import games.moisoni.google_iab.enums.ErrorType
 import games.moisoni.google_iab.enums.PurchasedResult
+import games.moisoni.google_iab.enums.SkuType
 import games.moisoni.google_iab.models.BillingResponse
 import games.moisoni.google_iab.models.PurchaseInfo
 import games.moisoni.google_iab.models.SkuInfo
@@ -20,7 +21,7 @@ class IapHelper {
         fun initBillingConnector(activity: AppCompatActivity): BillingConnector {
             val billingConnector = BillingConnector(
                 activity,
-                BuildConfig.ApiKey) //"license_key" - public developer key from Play Console
+                BuildConfig.ApiKey) //"license_key" - public developer key_outline.xml from Play Console
                 .setNonConsumableIds(listOf("zencrypt_pro")) //to set non-consumable ids - call only for non-consumable products
                 .autoAcknowledge() //legacy option - better call this. Alternatively purchases can be acknowledge via public method "acknowledgePurchase(PurchaseInfo purchaseInfo)"
                 .autoConsume() //legacy option - better call this. Alternatively purchases can be consumed via public method consumePurchase(PurchaseInfo purchaseInfo)"
@@ -29,14 +30,14 @@ class IapHelper {
 
             billingConnector.setBillingEventListener(object : BillingEventListener {
                 override fun onProductsFetched(@NonNull skuDetails: List<SkuInfo>) {
-                    if ( billingConnector.isPurchased(skuDetails.first() ) == PurchasedResult.YES )
+                    if ( billingConnector.isPurchased(skuDetails.first()) == PurchasedResult.YES )
                         activity.lifecycleScope.launch {
                             ZenCryptSettingsModel.isProUser.update(true)
                         }
                 }
 
-                override fun onPurchasedProductsFetched(@NonNull purchases: List<PurchaseInfo>) {
-                    /*Provides a list with fetched purchased products*/
+                override fun onPurchasedProductsFetched(skuType: SkuType, purchases: MutableList<PurchaseInfo>) {
+                    //nothing to do here...
                 }
 
                 override fun onProductsPurchased(@NonNull purchases: List<PurchaseInfo>) {
@@ -120,6 +121,12 @@ class IapHelper {
                             }
                         }
                         ErrorType.ITEM_NOT_OWNED -> {
+                            activity.lifecycleScope.launch {
+                                ZenCryptSettingsModel.isProUser.update(false)
+                            }
+                        }
+                        ErrorType.CONSUME_WARNING -> {
+                            SnackBarHelper.showSnackBarInfo("You have bought ZenCrypt pro, but payment is in pending status.")
                             activity.lifecycleScope.launch {
                                 ZenCryptSettingsModel.isProUser.update(false)
                             }

@@ -3,6 +3,7 @@ package com.zestas.cryptmyfiles.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -66,20 +67,23 @@ class EncryptedViewFragment : Fragment(R.layout.fragment_encrypted_view) {
                 progressDialog.show()
                 val data = withContext(Dispatchers.IO) {
                     val encryptedFileItems: ArrayList<FileItem> = ArrayList()
-                    externalFilesDir.walkTopDown().filter { file -> !file.isDirectory }.forEach { file ->
+                    externalFilesDir.walkTopDown().filter { file -> !file.isDirectory }.sortedBy { it.name }.forEach { file ->
                         if (file.name.endsWith(ZenCryptSettingsModel.extension.value))
                             encryptedFileItems.add(FileItem.create(file))
                     }
                     return@withContext encryptedFileItems
                 }
 
+                val tvLocation = binding.tvLocation
                 if (data.size == 0) {
                     val emptyListView = binding.emptyList
                     val infoIcon = binding.infoIcon
                     emptyListView.visibility = VISIBLE
+                    tvLocation.visibility = GONE
                     infoIcon.visibility = VISIBLE
                 }
                 else {
+                    tvLocation.visibility = VISIBLE
                     val recyclerView: RecyclerView = binding.cardListRecyclerView
                     recyclerView.setHasFixedSize(true)
                     val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)

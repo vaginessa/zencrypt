@@ -8,6 +8,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
     card_view:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -33,15 +34,16 @@
 
             <TextView
                 android:id="@+id/encrypted_file_title"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="17sp"
-                android:layout_toEndOf="@+id/encrypted_icon"
-                android:layout_toStartOf="@id/button"
-                android:layout_marginStart="8dp"
-                android:singleLine="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/button"
+                android:layout_toEndOf="@+id/encrypted_icon"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <!--My dropdown Button -->
@@ -58,7 +60,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="false"
                     android:layout_alignParentRight="false"
-                    android:background="@drawable/chevron_down" />
+                    android:background="?attr/chevron_drawable" />
             </RelativeLayout>
         </RelativeLayout>
         <!--The layout below is my ExpandableLayout -->

@@ -62,7 +62,7 @@ internal open class Constants {
         val DEF_ENCRYPTED_FILE_PATH = DEF_EXT_FILE_PATH + ENCRYPTED_FILE_NAME + ECRYPT_FILE_EXT
         val DEF_DECRYPTED_FILE_PATH = DEF_EXT_FILE_PATH + DECRYPTED_FILE_NAME + ECRYPT_FILE_EXT
 
-        const val ERR_INVALID_KEY = "The key is not valid. Please provide a valid RSA key."
+        const val ERR_INVALID_KEY = "The key_outline.xml is not valid. Please provide a valid RSA key_outline.xml."
         const val ERR_VERIFY_EXCEPTION = "Cannot use provided signature to verify input data."
         const val ERR_SIGN_EXCEPTION = "This signature algorithm is unable to process the input data provided."
         const val ERR_INPUT_TYPE_NOT_SUPPORTED = "Input type not supported."

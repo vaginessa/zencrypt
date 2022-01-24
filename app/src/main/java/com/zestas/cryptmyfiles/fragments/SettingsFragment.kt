@@ -1,15 +1,20 @@
 package com.zestas.cryptmyfiles.fragments
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.michaelflisar.materialpreferences.core.interfaces.StorageSetting
@@ -25,6 +30,7 @@ import com.michaelflisar.text.asText
 import com.zestas.cryptmyfiles.activities.MainActivity
 import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.activities.AboutActivity
+import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.databinding.FragmentSettingsBinding
 import com.zestas.cryptmyfiles.dataItemModels.ZenCryptSettingsModel
 import com.zestas.cryptmyfiles.helpers.IapHelper
@@ -241,12 +247,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                             ZenCryptSettingsModel.fingerprint_auth.update(false)
                             SnackBarHelper.showSnackBarError(getString(R.string.empty_password))
                         }
+                        else
+                            SnackBarHelper.showSnackBarCheck(getString(R.string.password_set))
                         //update the real password with user's input hash
                         ZenCryptSettingsModel.custom_pass_hash.update(it.sha256())
                         //then set the placeholder text view to empty again
                         ZenCryptSettingsModel.custom_pass_placeholder.update("")
                     }
                 }
+                textInputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
 
             category {

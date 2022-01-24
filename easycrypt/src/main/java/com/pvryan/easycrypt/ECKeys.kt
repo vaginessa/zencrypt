@@ -149,7 +149,7 @@ class ECKeys {
     }
 
     /**
-     * Generate a key pair with keys of specified length (default 4096) for RSA algorithm.
+     * Generate a key_outline.xml pair with keys of specified length (default 4096) for RSA algorithm.
      *
      * @param kpl listener interface of type [ECRSAKeyPairListener]
      * where generated keypair will be posted
@@ -176,12 +176,12 @@ class ECKeys {
     /**
      * Retrieve [RSAPublicKey] from base64 encoded string.
      *
-     * @param keyBase64String base64 encoded public key string (X.509 format)
+     * @param keyBase64String base64 encoded public key_outline.xml string (X.509 format)
      *
      * @return [RSAPublicKey]
      *
      * @throws IllegalArgumentException when [keyBase64String] is not a valid base64 string
-     * @throws InvalidKeySpecException when input is not a valid key
+     * @throws InvalidKeySpecException when input is not a valid key_outline.xml
      */
     @Throws(IllegalArgumentException::class, InvalidKeySpecException::class)
     fun genRSAPublicKeyFromBase64(keyBase64String: String) =
@@ -191,12 +191,12 @@ class ECKeys {
     /**
      * Retrieve [RSAPrivateKey] from base64 encoded string.
      *
-     * @param keyBase64String base64 encoded private key string (PKCS#8 format)
+     * @param keyBase64String base64 encoded private key_outline.xml string (PKCS#8 format)
      *
      * @return [RSAPrivateKey]
      *
      * @throws IllegalArgumentException when [keyBase64String] is not a valid base64 string
-     * @throws InvalidKeySpecException when input is not a valid key
+     * @throws InvalidKeySpecException when input is not a valid key_outline.xml
      */
     @Throws(IllegalArgumentException::class, InvalidKeySpecException::class)
     fun genRSAPrivateKeyFromBase64(keyBase64String: String) =

@@ -20,6 +20,7 @@
         <item name="fab_menu_labels_text_color">@color/black</item>
         <item name="fontFamily">@font/sf_pro_display_medium</item>
         <item name="info_icon_drawable">@drawable/info_outline</item>
+        <item name="chevron_drawable">@drawable/chevron_down_white</item>
         <item name="android:navigationBarColor">@color/darkMenuBarColor</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
         <!-- colors for appbar layout day/night -->
@@ -40,6 +41,10 @@
         <item name="android:backgroundDimAmount">0.5</item>
         <item name="windowMinWidthMajor">100%</item>
         <item name="windowMinWidthMinor">100%</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="dialogCornerRadius">14dp</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">

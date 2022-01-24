@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25625" />
+        <entry key="../../.gradle/caches/transforms-3/8e7c1e887a544febc05cfe7b844f1526/transformed/jetified-biometric-2.0.63/res/drawable/bio_ic_fingerprint.xml" value="2.240625" />
+        <entry key="../../.gradle/caches/transforms-3/8e7c1e887a544febc05cfe7b844f1526/transformed/jetified-biometric-2.0.63/res/drawable/fingerprint_draw_off.xml" value="0.3734375" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/alpha_z_circle.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/drawable/alpha_z_circle_black.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/archive_lock.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/archive_refresh_outline.xml" value="0.3734375" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/cart_check.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/check_all.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/chevron_down.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/chevron_down_white.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/drawable/close.xml" value="0.3734375" />
         <entry key="app/src/main/res/drawable/close_circle_multiple_outline.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/close_circle_outline.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/cog.xml" value="0.25729166666666664" />
@@ -43,6 +48,8 @@
         <entry key="app/src/main/res/drawable/info_outline_black.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/info_outline_check.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/info_variant.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/key.xml" value="0.3734375" />
+        <entry key="app/src/main/res/drawable/key_arrow_right.xml" value="0.3734375" />
         <entry key="app/src/main/res/drawable/launcher_icon_foreground.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/lock_check.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/lock_minus_outline.xml" value="0.25729166666666664" />
@@ -58,6 +65,7 @@
         <entry key="app/src/main/res/drawable/plus_circle_outline.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/plus_sector_multiple.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/round_corner_toggle.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/rounded_borders.xml" value="0.3734375" />
         <entry key="app/src/main/res/drawable/shield_key_outline.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/shield_key_outline_white.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/shield_lock_outline.xml" value="0.43697916666666664" />
@@ -66,6 +74,7 @@
         <entry key="app/src/main/res/drawable/shield_remove_outline.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/star_outline.xml" value="0.43697916666666664" />
+        <entry key="app/src/main/res/drawable/test.xml" value="0.4359375" />
         <entry key="app/src/main/res/drawable/test_title_logo.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/trash_can_outline.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/activity_action.xml" value="0.3867753623188406" />
@@ -83,6 +92,8 @@
         <entry key="app/src/main/res/layout/layout_collapsed_view.xml" value="0.384963768115942" />
         <entry key="app/src/main/res/layout/layout_expanded_view.xml" value="0.384963768115942" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.42083333333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/launcher_icon.xml" value="0.4359375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/launcher_icon_round.xml" value="0.4359375" />
         <entry key="app/src/main/res/xml/resource_paths.xml" value="0.36367753623188404" />
       </map>
     </option>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.app.AlertDialog
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -44,19 +45,22 @@ class DecryptedViewFragment : Fragment(R.layout.fragment_decrypted_view) {
                 progressDialog.show()
                 val data = withContext(Dispatchers.IO) {
                     val decryptedFilesItems: ArrayList<FileItem> = ArrayList()
-                    externalFilesDir.walkTopDown().filter { file -> !file.isDirectory }.forEach { file ->
+                    externalFilesDir.walkTopDown().filter { file -> !file.isDirectory }.sortedBy { it.name }.forEach { file ->
                         decryptedFilesItems.add(FileItem.create(file))
                     }
                     return@withContext decryptedFilesItems
                 }
 
+                val tvLocation = binding.tvLocation
                 if (data.size == 0) {
                     val emptyListView = binding.emptyList
                     val infoIcon = binding.infoIcon
                     emptyListView.visibility = VISIBLE
+                    tvLocation.visibility = GONE
                     infoIcon.visibility = VISIBLE
                 }
                 else {
+                    tvLocation.visibility = VISIBLE
                     val recyclerView: RecyclerView = binding.cardListRecyclerView
                     recyclerView.setHasFixedSize(true)
                     val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
