@@ -73,15 +73,11 @@
         and has no internet connection permission (except for google play billing library, which is required for purchasing pro version). You can check the encryption library\'s
         source code below. Credits go to Priyank Vasa (EasyCrypt) on Github.</string>
 
-    <string name="zencrypt_changelog"><![CDATA[ZenCrypt v3.2
-        <br/>> Revamped the encryption/decryption dialog.
-        <br/>> Added pseudo random password generation functionality in the analyzer screen.
-        <br/>> You can now select files from any file provider you have installed.
-        <br/>> Bug fixes and improvements.
+    <string name="zencrypt_changelog"><![CDATA[ZenCrypt v3.3
         <br/>> Libraries updated.
-        <br/>> Build tools updated.
-        <br/>> Some design improvements.
-        <br/>> Icon changed again.]]></string>
+        <br/>> Kotlin plugins updated.
+        <br/>> Build Tools updated.
+        <br/>> App now properly targets Android 12.]]></string>
 
 
     <!-- LIBRARY EXTRAS FOR ABOUT FRAGMENT GENERATION -->
