@@ -1,0 +1,15 @@
+{
+  "uniqueId": "com.pvryan.easycrypt",
+  "developers": [
+    {
+      "name": "Priyank Vasa"
+    }
+  ],
+  "artifactVersion": "1.3.5",
+  "description": "Secure and efficient cryptography library for Android. EasyCrypt uses only secure implementations and all the known Crypto bugs are already dealt with properly.",
+  "name": "EasyCrypt",
+  "website" : "https://github.com/pvasa/EasyCrypt",
+  "licenses": [
+    "Apache-2.0"
+  ]
+}

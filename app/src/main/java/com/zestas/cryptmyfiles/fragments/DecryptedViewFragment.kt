@@ -6,7 +6,6 @@ import android.view.View
 import android.app.AlertDialog
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,9 +39,9 @@ class DecryptedViewFragment : Fragment(R.layout.fragment_decrypted_view) {
 
     private fun loadDataAndPopulateCardView() {
         buildProgressDialog()
+        progressDialog.show()
         lifecycleScope.launch {
             whenStarted {
-                progressDialog.show()
                 val data = withContext(Dispatchers.IO) {
                     val decryptedFilesItems: ArrayList<FileItem> = ArrayList()
                     externalFilesDir.walkTopDown().filter { file -> !file.isDirectory }.sortedBy { it.name }.forEach { file ->
@@ -67,8 +66,8 @@ class DecryptedViewFragment : Fragment(R.layout.fragment_decrypted_view) {
                     recyclerView.layoutManager = layoutManager
                     recyclerView.adapter = DecryptedFilesExpandableRecyclerAdapter(data)
                 }
-                progressDialog.dismiss()
             }
+            progressDialog.dismiss()
         }
     }
 

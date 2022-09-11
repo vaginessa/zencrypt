@@ -62,21 +62,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"
     implementation "com.nulab-inc:zxcvbn:${rootProject.ext.zxcvbn}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlin_version}"
-}
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 }
 
 tasks.withType(Javadoc) {

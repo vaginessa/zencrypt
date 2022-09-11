@@ -33,16 +33,14 @@ import com.zestas.cryptmyfiles.fragments.DecryptedViewFragment
 import com.zestas.cryptmyfiles.fragments.EncryptedViewFragment
 import com.zestas.cryptmyfiles.helpers.FragmentHelper
 import com.zestas.cryptmyfiles.helpers.SnackBarHelper
-import dev.skomlach.biometric.compat.BiometricApi
-import dev.skomlach.biometric.compat.BiometricAuthRequest
-import dev.skomlach.biometric.compat.BiometricPromptCompat
-import dev.skomlach.biometric.compat.BiometricType
-import dev.skomlach.biometric.compat.AuthenticationFailureReason
+import dev.skomlach.biometric.compat.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
+
 
 class ActionActivity: AppCompatActivity(), ECResultListener {
     private val layoutFileName by lazy { findViewById<LinearLayout>(R.id.file_name_layout) }
@@ -60,7 +58,12 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     private val tvPassword by lazy { findViewById<TextInputEditText>(R.id.tvPassword) }
     private val progressBar by lazy { findViewById<LinearProgressIndicator>(R.id.determinateBar) }
 
+    private var maxSet = false
+    private var filesToProcess = 0
+    private var filesEncrypted = 0
+
     private var dataUri: Uri? = null
+    private var multiDataUris = ArrayList<Uri?>()
     private var fileToDelete: File? = null
     private var resultName = ""
     private var resultSize = ""
@@ -69,32 +72,87 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     private var intentRequestCode: Int = -1
     private var intentReplaceCode: Int = -1
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            disableButtons()
-            lifecycleScope.launch {
-                whenStarted {
-                    dataUri = result.data?.data
-                    withContext(Dispatchers.IO) {
-                        resultName += dataUri?.getOriginalFileName(context)
-                        val length = dataUri?.length(contentResolver)!!
-                        if (length == -1L) {
-                            SnackBarHelper.showSnackBarError(getString(R.string.this_file_manager_is_not_supported))
-                            finish()
+    private val singleFileResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                disableButtons()
+                lifecycleScope.launch {
+                    whenStarted {
+                        dataUri = result.data?.data
+                        withContext(Dispatchers.IO) {
+                            resultName += dataUri?.getOriginalFileName(context)
+                            val length = dataUri?.length(contentResolver)!!
+                            if (length == -1L) {
+                                SnackBarHelper.showSnackBarError(getString(R.string.this_file_manager_is_not_supported))
+                                finish()
+                            }
+                            filesToProcess = 1
+                            resultSize += formatFileSize(length)
                         }
-                        resultSize += formatFileSize(length)
                     }
-                }
 
-                setFileTextViewNameAndSize(resultName, resultSize)
-                hideIndeterminateProgress()
-                showFileTextViews()
-                enableButtons()
+                    setFileTextViewNameAndSize(resultName, resultSize)
+                    hideIndeterminateProgress()
+                    showFileTextViews()
+                    enableButtons()
+                }
             }
-        }
-        else
-            finish()
+            else
+                finish()
     }
+
+    private val multiFileResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                disableButtons()
+                lifecycleScope.launch {
+                    whenStarted {
+                        val data: Intent? = result.data
+                        withContext(Dispatchers.IO) {
+                            //Multiple selected
+                            if (data?.clipData != null) {
+                                val count = data.clipData?.itemCount ?: 0
+                                var totalLength: Long = 0
+                                for (i in 0 until count) {
+                                    val uri: Uri? = data.clipData?.getItemAt(i)?.uri
+                                    resultName += uri?.getOriginalFileName(context) + "\n"
+                                    val length = uri?.length(contentResolver)!!
+                                    if (length == -1L) {
+                                        SnackBarHelper.showSnackBarError(getString(R.string.this_file_manager_is_not_supported))
+                                        finish()
+                                    }
+                                    totalLength += length
+                                    multiDataUris.add(uri)
+                                }
+                                filesToProcess = count
+                                //remove excess '\n'
+                                resultName = resultName.substring(0,resultName.length - 1)
+                                resultSize += formatFileSize(totalLength) + " ($count files)"
+                            }
+                            //Single selected
+                            else if (data?.data != null) {
+                                val uri: Uri? = data.data
+                                resultName += uri?.getOriginalFileName(context)
+                                val length = uri?.length(contentResolver)!!
+                                if (length == -1L) {
+                                    SnackBarHelper.showSnackBarError(getString(R.string.this_file_manager_is_not_supported))
+                                    finish()
+                                }
+                                multiDataUris.add(uri)
+                                filesToProcess = 1
+                                resultSize += formatFileSize(length)
+                            }
+                        }
+                    }
+                    setFileTextViewNameAndSize(resultName, resultSize)
+                    hideIndeterminateProgress()
+                    showFileTextViews()
+                    enableButtons()
+                }
+            }
+            else
+                finish()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,6 +175,7 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
 
         when (intentRequestCode) {
             ZenCryptConstants.FILE_PICK -> selectFile()
+            ZenCryptConstants.FILE_PICK_MULTIPLE -> selectMultipleFiles()
             else -> {
                 val file: File = intent.extras?.get(ZenCryptConstants.FILE) as File
 
@@ -139,7 +198,15 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "*/*"
-        startForResult.launch(intent)
+        singleFileResult.launch(intent)
+    }
+
+    private fun selectMultipleFiles() {
+        val filesIntent = Intent(Intent.ACTION_GET_CONTENT)
+        filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        filesIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        filesIntent.type = "*/*"
+        multiFileResult.launch(filesIntent)
     }
 
     private fun initButtonListeners() {
@@ -160,23 +227,34 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     }
 
     private fun initWindowTitle() {
-        if ( intentAction == ZenCryptConstants.ACTION_ENCRYPT ) {
-            tvTitle.text = getString(R.string.encrypt)
-            tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                R.drawable.lock_plus_outline,
-                0,
-                0,
-                0
-            )
-        }
-        else {
-            tvTitle.text = getString(R.string.decrypt)
-            tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                R.drawable.lock_minus_outline,
-                0,
-                0,
-                0
-            )
+        when (intentAction) {
+            ZenCryptConstants.ACTION_ENCRYPT -> {
+                tvTitle.text = getString(R.string.encrypt)
+                tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.lock_plus_outline,
+                    0,
+                    0,
+                    0
+                )
+            }
+            ZenCryptConstants.ACTION_ENCRYPT_MULTIPLE -> {
+                tvTitle.text = getString(R.string.encrypt_multiple)
+                tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.sort_variant_lock,
+                    0,
+                    0,
+                    0
+                )
+            }
+            else -> {
+                tvTitle.text = getString(R.string.decrypt)
+                tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.lock_minus_outline,
+                    0,
+                    0,
+                    0
+                )
+            }
         }
     }
 
@@ -186,29 +264,55 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         else
             tvPassword.text.toString().trim()
 
-        if (dataUri != null && pass != "") {
-            hidePasswordLayout()
-            showDeterminateProgress()
-            disableButtons()
-
-            when (intentAction) {
-                ZenCryptConstants.ACTION_ENCRYPT -> startEncrypting(pass)
-                ZenCryptConstants.ACTION_DECRYPT -> startDecrypting(pass)
+        when (intentAction) {
+            ZenCryptConstants.ACTION_ENCRYPT -> {
+                if (dataUri != null && pass != "") {
+                    filesToProcess = 1
+                    hidePasswordLayout()
+                    showDeterminateProgress()
+                    determineTextView.text = getString(R.string.encrypting)
+                    disableButtons()
+                    startEncrypting(pass)
+                }
+                else {
+                    SnackBarHelper.showSnackBarError(getString(R.string.something_went_wrong_empty_password),this)
+                }
             }
-        }
-        else {
-            SnackBarHelper.showSnackBarError(getString(R.string.something_went_wrong_empty_password),this)
+            ZenCryptConstants.ACTION_DECRYPT -> {
+                if (dataUri != null && pass != "") {
+                    filesToProcess = 1
+                    hidePasswordLayout()
+                    showDeterminateProgress()
+                    determineTextView.text = getString(R.string.decrypting)
+                    disableButtons()
+                    startDecrypting(pass)
+                }
+                else {
+                    SnackBarHelper.showSnackBarError(getString(R.string.something_went_wrong_empty_password),this)
+                }
+            }
+            ZenCryptConstants.ACTION_ENCRYPT_MULTIPLE -> {
+                if (multiDataUris.isNotEmpty() && pass != "") {
+                    hidePasswordLayout()
+                    showDeterminateProgress()
+                    determineTextView.text = getString(R.string.encrypting)
+                    disableButtons()
+                    startEncryptingMultiple(pass)
+                }
+                else {
+                    SnackBarHelper.showSnackBarError(getString(R.string.something_went_wrong_empty_password),this)
+                }
+            }
         }
     }
 
     private fun startEncrypting(pass: String) {
         val eCryptSymmetric = ECSymmetric()
 
-        determineTextView.text = getString(R.string.encrypting)
         val fis = contentResolver.openInputStream(dataUri!!)
         val filePath = ZenCryptConstants.encryptedFilesDir(this).absolutePath +
                 File.separator +
-                resultName +
+                dataUri!!.getOriginalFileName(context) +
                 ZenCryptSettingsModel.extension.value
 
         val outputFile = File(filePath)
@@ -223,10 +327,22 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         }
     }
 
+    private fun startEncryptingMultiple(pass: String) {
+        var i = 0
+        lifecycleScope.launch {
+            do {
+                coroutineScope {
+                    dataUri = multiDataUris[i]
+                    startEncrypting(pass)
+                    i++
+                }
+            }while (i < filesToProcess)
+        }
+    }
+
     private fun startDecrypting(pass: String) {
         val eCryptSymmetric = ECSymmetric()
 
-        determineTextView.text = getString(R.string.decrypting)
         val fis = contentResolver.openInputStream(dataUri!!)
         var filePath = ZenCryptConstants.decryptedFilesDir(this).absolutePath +
                 File.separator +
@@ -249,32 +365,17 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     }
 
     override fun <T> onSuccess(result: T) {
-        SnackBarHelper.showSnackBarCheck(getString(R.string.operation_completed_successfully))
-
         if (fileToDelete != null && fileToDelete!!.canWrite())
             fileToDelete!!.delete()
 
         dataUri = null
         fileToDelete = null
+        maxSet = false
 
-        if (ZenCryptSettingsModel.vibration.value) vibrate()
-
-        finish()
-        if (intentRequestCode == ZenCryptConstants.FROM_CARD_VIEW) {
-            if (intentAction == ZenCryptConstants.ACTION_ENCRYPT)
-                FragmentHelper.replaceFragmentWithDelay(DecryptedViewFragment(), 0)
-            else
-                FragmentHelper.replaceFragmentWithDelay(EncryptedViewFragment(), 0)
-        }
-        else {
-            if (intentReplaceCode == ZenCryptConstants.REPLACE_WITH_ENCRYPTED)
-                FragmentHelper.replaceFragmentWithDelay(EncryptedViewFragment(), 0)
-            else
-                FragmentHelper.replaceFragmentWithDelay(DecryptedViewFragment(), 0)
-        }
+        filesEncrypted++
+        if (filesEncrypted == filesToProcess) finishActivitySuccessfully()
     }
 
-    private var maxSet = false
     override fun onProgress(newBytes: Int, bytesProcessed: Long, totalBytes: Long) {
         if (totalBytes > -1) {
             lifecycleScope.launch {
@@ -296,12 +397,21 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
     }
 
     private fun startFingerprintAuth() {
+        val title = when (intentAction) {
+            ZenCryptConstants.ACTION_ENCRYPT -> getString(R.string.encrypt)
+            ZenCryptConstants.ACTION_ENCRYPT_MULTIPLE -> getString(R.string.encrypt_multiple)
+            else -> getString(R.string.decrypt)
+        }
+        val subtitle = when (intentAction) {
+            ZenCryptConstants.ACTION_ENCRYPT_MULTIPLE -> multiDataUris.count().toString() + " " + getString(R.string.files_selected)
+            else -> resultName
+        }
         val biometricPromptCompat = BiometricPromptCompat.Builder(
             BiometricAuthRequest(BiometricApi.AUTO, BiometricType.BIOMETRIC_FINGERPRINT),
             this
         )
-            .setTitle(if (intentAction == ZenCryptConstants.ACTION_ENCRYPT) getString(R.string.encrypt) else getString(R.string.decrypt))
-            .setSubtitle(resultName)
+            .setTitle(title)
+            .setSubtitle(subtitle)
             .setEnabledNotification(false)
             .setNegativeButton(getString(android.R.string.cancel), null)
             .build()
@@ -377,7 +487,7 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
             val nameColumnIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
             it.moveToFirst()
             it.getString(nameColumnIndex)
-        }
+        } ?: this.path?.substring(this.path!!.lastIndexOf('/') + 1)
     }
 
     private fun Uri.length(contentResolver: ContentResolver): Long {
@@ -429,6 +539,24 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
                 val gb: Double = mb / 1024
                 "%.${decimals}f GiB".format(gb)
             }
+        }
+    }
+
+    private fun finishActivitySuccessfully() {
+        SnackBarHelper.showSnackBarCheck(getString(R.string.operation_completed_successfully))
+        if (ZenCryptSettingsModel.vibration.value) vibrate()
+
+        finish()
+        if (intentRequestCode == ZenCryptConstants.FROM_CARD_VIEW) {
+            if (intentAction == ZenCryptConstants.ACTION_ENCRYPT)
+                FragmentHelper.replaceFragmentWithDelay(DecryptedViewFragment(), 0)
+            else
+                FragmentHelper.replaceFragmentWithDelay(EncryptedViewFragment(), 0)
+        } else {
+            if (intentReplaceCode == ZenCryptConstants.REPLACE_WITH_ENCRYPTED)
+                FragmentHelper.replaceFragmentWithDelay(EncryptedViewFragment(), 0)
+            else
+                FragmentHelper.replaceFragmentWithDelay(DecryptedViewFragment(), 0)
         }
     }
 

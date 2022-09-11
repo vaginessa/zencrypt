@@ -1,6 +1,7 @@
 package com.zestas.cryptmyfiles.adapters
 
 import android.animation.ObjectAnimator
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.util.SparseBooleanArray
@@ -19,7 +20,8 @@ import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.activities.ActionActivity
 import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.dataItemModels.FileItem
-import com.zestas.cryptmyfiles.helpers.DeleteFileHelper
+import com.zestas.cryptmyfiles.helpers.FileActionsHelper
+import com.zestas.cryptmyfiles.helpers.SnackBarHelper
 
 
 class EncryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) :
@@ -54,8 +56,13 @@ class EncryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) 
         //---- Button listeners
         // Delete button
         viewHolder.expandableLayout.findViewById<Button>(R.id.button_delete).setOnClickListener {
-            DeleteFileHelper.showFileDeleteConfirmDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_ENCRYPTED)
+            FileActionsHelper.showFileDeleteConfirmDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_ENCRYPTED)
         }
+        // Rename button
+        viewHolder.expandableLayout.findViewById<Button>(R.id.button_rename).setOnClickListener {
+            FileActionsHelper.showFileRenameDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_ENCRYPTED)
+        }
+
         // Decrypt button
         viewHolder.expandableLayout.findViewById<Button>(R.id.button_decrypt).setOnClickListener {
             val intent = Intent(context, ActionActivity::class.java)
@@ -72,7 +79,11 @@ class EncryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) 
             shareIntent.type = "*/*"
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
             shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK;
-            context!!.startActivity(shareIntent)
+            try {
+                context!!.startActivity(shareIntent)
+            } catch (e: ActivityNotFoundException) {
+                SnackBarHelper.showSnackBarError("No activity found.")
+            }
         }
     }
 

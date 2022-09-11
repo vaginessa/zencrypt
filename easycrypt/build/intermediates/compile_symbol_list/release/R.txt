@@ -100,6 +100,9 @@ int attr buttonStyle 0x0
 int attr buttonStyleSmall 0x0
 int attr buttonTint 0x0
 int attr buttonTintMode 0x0
+int attr checkMarkCompat 0x0
+int attr checkMarkTint 0x0
+int attr checkMarkTintMode 0x0
 int attr checkboxStyle 0x0
 int attr checkedTextViewStyle 0x0
 int attr closeIcon 0x0
@@ -152,6 +155,7 @@ int attr editTextBackground 0x0
 int attr editTextColor 0x0
 int attr editTextStyle 0x0
 int attr elevation 0x0
+int attr emojiCompatEnabled 0x0
 int attr expandActivityOverflowButtonDrawable 0x0
 int attr firstBaselineToTopHeight 0x0
 int attr font 0x0
@@ -181,6 +185,7 @@ int attr indeterminateProgressStyle 0x0
 int attr initialActivityCount 0x0
 int attr isLightTheme 0x0
 int attr itemPadding 0x0
+int attr lStar 0x0
 int attr lastBaselineToBottomHeight 0x0
 int attr layout 0x0
 int attr lineHeight 0x0
@@ -208,6 +213,7 @@ int attr multiChoiceItemLayout 0x0
 int attr navigationContentDescription 0x0
 int attr navigationIcon 0x0
 int attr navigationMode 0x0
+int attr nestedScrollViewStyle 0x0
 int attr numericModifiers 0x0
 int attr overlapAnchor 0x0
 int attr paddingBottomNoButtons 0x0
@@ -225,6 +231,7 @@ int attr progressBarPadding 0x0
 int attr progressBarStyle 0x0
 int attr queryBackground 0x0
 int attr queryHint 0x0
+int attr queryPatterns 0x0
 int attr radioButtonStyle 0x0
 int attr ratingBarStyle 0x0
 int attr ratingBarStyleIndicator 0x0
@@ -235,6 +242,7 @@ int attr searchViewStyle 0x0
 int attr seekBarStyle 0x0
 int attr selectableItemBackground 0x0
 int attr selectableItemBackgroundBorderless 0x0
+int attr shortcutMatchRequired 0x0
 int attr showAsAction 0x0
 int attr showDividers 0x0
 int attr showText 0x0
@@ -618,6 +626,7 @@ int drawable notification_template_icon_bg 0x0
 int drawable notification_template_icon_low_bg 0x0
 int drawable notification_tile_bg 0x0
 int drawable notify_panel_notification_icon_bg 0x0
+int drawable test_level_drawable 0x0
 int drawable tooltip_frame_dark 0x0
 int drawable tooltip_frame_light 0x0
 int id accessibility_action_clickable_span 0x0
@@ -769,6 +778,7 @@ int id unchecked 0x0
 int id uniform 0x0
 int id up 0x0
 int id view_tree_lifecycle_owner 0x0
+int id view_tree_on_back_pressed_dispatcher_owner 0x0
 int id view_tree_saved_state_registry_owner 0x0
 int id view_tree_view_model_store_owner 0x0
 int id visible_removing_fragment_view_tag 0x0
@@ -1273,6 +1283,7 @@ int styleable AnimatedStateListDrawableTransition_android_drawable 0
 int styleable AnimatedStateListDrawableTransition_android_fromId 1
 int styleable AnimatedStateListDrawableTransition_android_reversible 2
 int styleable AnimatedStateListDrawableTransition_android_toId 3
+int[] styleable AppCompatEmojiHelper {  }
 int[] styleable AppCompatImageView { 0x1010119, 0x0, 0x0, 0x0 }
 int styleable AppCompatImageView_android_src 0
 int styleable AppCompatImageView_srcCompat 1
@@ -1291,7 +1302,7 @@ int styleable AppCompatTextHelper_android_drawableRight 3
 int styleable AppCompatTextHelper_android_drawableStart 4
 int styleable AppCompatTextHelper_android_drawableTop 5
 int styleable AppCompatTextHelper_android_textAppearance 6
-int[] styleable AppCompatTextView { 0x1010034, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int[] styleable AppCompatTextView { 0x1010034, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable AppCompatTextView_android_textAppearance 0
 int styleable AppCompatTextView_autoSizeMaxTextSize 1
 int styleable AppCompatTextView_autoSizeMinTextSize 2
@@ -1306,13 +1317,14 @@ int styleable AppCompatTextView_drawableStartCompat 10
 int styleable AppCompatTextView_drawableTint 11
 int styleable AppCompatTextView_drawableTintMode 12
 int styleable AppCompatTextView_drawableTopCompat 13
-int styleable AppCompatTextView_firstBaselineToTopHeight 14
-int styleable AppCompatTextView_fontFamily 15
-int styleable AppCompatTextView_fontVariationSettings 16
-int styleable AppCompatTextView_lastBaselineToBottomHeight 17
-int styleable AppCompatTextView_lineHeight 18
-int styleable AppCompatTextView_textAllCaps 19
-int styleable AppCompatTextView_textLocale 20
+int styleable AppCompatTextView_emojiCompatEnabled 14
+int styleable AppCompatTextView_firstBaselineToTopHeight 15
+int styleable AppCompatTextView_fontFamily 16
+int styleable AppCompatTextView_fontVariationSettings 17
+int styleable AppCompatTextView_lastBaselineToBottomHeight 18
+int styleable AppCompatTextView_lineHeight 19
+int styleable AppCompatTextView_textAllCaps 20
+int styleable AppCompatTextView_textLocale 21
 int[] styleable AppCompatTheme { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10100ae, 0x1010057, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable AppCompatTheme_actionBarDivider 0
 int styleable AppCompatTheme_actionBarItemBackground 1
@@ -1443,10 +1455,20 @@ int styleable AppCompatTheme_windowMinWidthMinor 125
 int styleable AppCompatTheme_windowNoTitle 126
 int[] styleable ButtonBarLayout { 0x0 }
 int styleable ButtonBarLayout_allowStacking 0
-int[] styleable ColorStateListItem { 0x0, 0x101031f, 0x10101a5 }
+int[] styleable Capability { 0x0, 0x0 }
+int styleable Capability_queryPatterns 0
+int styleable Capability_shortcutMatchRequired 1
+int[] styleable CheckedTextView { 0x1010108, 0x0, 0x0, 0x0 }
+int styleable CheckedTextView_android_checkMark 0
+int styleable CheckedTextView_checkMarkCompat 1
+int styleable CheckedTextView_checkMarkTint 2
+int styleable CheckedTextView_checkMarkTintMode 3
+int[] styleable ColorStateListItem { 0x0, 0x101031f, 0x10101a5, 0x1010647, 0x0 }
 int styleable ColorStateListItem_alpha 0
 int styleable ColorStateListItem_android_alpha 1
 int styleable ColorStateListItem_android_color 2
+int styleable ColorStateListItem_android_lStar 3
+int styleable ColorStateListItem_lStar 4
 int[] styleable CompoundButton { 0x1010107, 0x0, 0x0, 0x0 }
 int styleable CompoundButton_android_button 0
 int styleable CompoundButton_buttonCompat 1

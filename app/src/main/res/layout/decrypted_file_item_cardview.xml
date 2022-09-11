@@ -92,36 +92,55 @@
                     android:id="@+id/coordinator_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_encrypt"
+                        style="@style/ToggleButtonWithIconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
+                        card_view:icon="@drawable/lock_plus_outline"
+                        card_view:iconTint="@color/ZenCryptPrimary"
                         android:foreground="?selectableItemBackground"
-                        android:background="@android:color/transparent"
-                        android:text="@string/encrypt" />
+                        android:background="@android:color/transparent" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_open"
+                        style="@style/ToggleButtonWithIconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         card_view:layout_anchor="@id/button_encrypt"
                         card_view:layout_anchorGravity="left"
                         android:layout_gravity="left"
+                        card_view:icon="@drawable/open_in_new"
+                        card_view:iconTint="@color/ZenCryptPrimary"
                         android:foreground="?selectableItemBackground"
-                        android:background="@android:color/transparent"
-                        android:text="@string/open" />
+                        android:background="@android:color/transparent" />
 
-                    <Button
-                        android:id="@+id/button_delete"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_rename"
+                        style="@style/ToggleButtonWithIconOnly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         card_view:layout_anchor="@id/button_open"
                         card_view:layout_anchorGravity="left"
                         android:layout_gravity="left"
+                        card_view:icon="@drawable/pencil"
+                        card_view:iconTint="@color/ZenCryptPrimary"
                         android:foreground="?selectableItemBackground"
-                        android:background="@android:color/transparent"
-                        android:text="@string/delete" />
+                        android:background="@android:color/transparent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_delete"
+                        style="@style/ToggleButtonWithIconOnly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:layout_anchor="@id/button_rename"
+                        card_view:layout_anchorGravity="left"
+                        android:layout_gravity="left"
+                        card_view:icon="@drawable/trash_can_outline"
+                        card_view:iconTint="@color/ZenCryptPrimary"
+                        android:foreground="?selectableItemBackground"
+                        android:background="@android:color/transparent" />
 
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -23,6 +23,8 @@
     <dimen name="default_collapsed_padding">200dp</dimen>
     <dimen name="default_expanded_padding">0dp</dimen>
 
+    <dimen name="dp_19">19dp</dimen>
+
         <dimen name="image_final_width">32dp</dimen>
 
         <dimen name="expanded_toolbar_height">200dp</dimen>

@@ -1,7 +1,6 @@
 package com.zestas.cryptmyfiles.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -19,7 +18,6 @@ import com.zestas.cryptmyfiles.helpers.*
 import com.zestas.cryptmyfiles.helpers.FragmentHelper.Companion.replaceFragmentWithDelay
 import dev.skomlach.biometric.compat.BiometricPromptCompat
 import kotlinx.coroutines.*
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         FabHelper.init(this)
         SnackBarHelper.init(this)
         FragmentHelper.init(this)
-        DeleteFileHelper.init(this)
+        FileActionsHelper.init(this)
 
         lifecycleScope.launch {
             whenStarted {
@@ -83,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (menu.getSelectedItemId() != R.id.encrypted) {
-            replaceFragmentWithDelay(EncryptedViewFragment())
+//            replaceFragmentWithDelay(EncryptedViewFragment())
             menu.setItemSelected(R.id.encrypted)
         }
         else {

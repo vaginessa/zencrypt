@@ -1,6 +1,7 @@
 package com.zestas.cryptmyfiles.adapters
 
 import android.animation.ObjectAnimator
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.util.SparseBooleanArray
@@ -19,7 +20,8 @@ import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.activities.ActionActivity
 import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.dataItemModels.FileItem
-import com.zestas.cryptmyfiles.helpers.DeleteFileHelper
+import com.zestas.cryptmyfiles.helpers.FileActionsHelper
+import com.zestas.cryptmyfiles.helpers.SnackBarHelper
 
 
 class DecryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) :
@@ -54,7 +56,11 @@ class DecryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) 
         //---- Button listeners
         // Delete button
         viewHolder.expandableLayout.findViewById<Button>(R.id.button_delete).setOnClickListener {
-            DeleteFileHelper.showFileDeleteConfirmDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_DECRYPTED)
+            FileActionsHelper.showFileDeleteConfirmDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_DECRYPTED)
+        }
+        // Rename button
+        viewHolder.expandableLayout.findViewById<Button>(R.id.button_rename).setOnClickListener {
+            FileActionsHelper.showFileRenameDialog(data[position].getFile(), ZenCryptConstants.REPLACE_WITH_DECRYPTED)
         }
         // Encrypt button
         viewHolder.expandableLayout.findViewById<Button>(R.id.button_encrypt).setOnClickListener {
@@ -71,7 +77,11 @@ class DecryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) 
             openIntent.setDataAndType(uri, context!!.contentResolver.getType(uri))
             openIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             openIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            context!!.startActivity(openIntent)
+            try {
+                context!!.startActivity(openIntent)
+            } catch (e: ActivityNotFoundException) {
+                SnackBarHelper.showSnackBarError("Cannot open file!")
+            }
         }
 
     }

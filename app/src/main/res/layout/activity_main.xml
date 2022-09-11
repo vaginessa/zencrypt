@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -121,6 +122,17 @@
         app:menu_labels_colorNormal="?attr/fab_menu_labels_color"
         app:menu_labels_colorRipple="@color/ZenCryptFabActionRipple"
         app:menu_labels_colorPressed="?attr/fab_menu_labels_color">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_action_encrypt_multiple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sort_variant_lock"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/ZenCryptFabActionColor"
+            app:fab_colorPressed="@color/ZenCryptFabActionColor"
+            app:fab_colorRipple="@color/ZenCryptFabActionRipple"
+            app:fab_label="@string/encrypt_multiple" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_action_encrypt"

@@ -9,11 +9,11 @@ import com.zestas.cryptmyfiles.fragments.SettingsFragment
 import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
 import games.moisoni.google_iab.enums.ErrorType
+import games.moisoni.google_iab.enums.ProductType
 import games.moisoni.google_iab.enums.PurchasedResult
-import games.moisoni.google_iab.enums.SkuType
 import games.moisoni.google_iab.models.BillingResponse
+import games.moisoni.google_iab.models.ProductInfo
 import games.moisoni.google_iab.models.PurchaseInfo
-import games.moisoni.google_iab.models.SkuInfo
 import kotlinx.coroutines.launch
 
 class IapHelper {
@@ -29,14 +29,14 @@ class IapHelper {
                 .connect() //to connect billing client with Play Console
 
             billingConnector.setBillingEventListener(object : BillingEventListener {
-                override fun onProductsFetched(@NonNull skuDetails: List<SkuInfo>) {
-                    if ( billingConnector.isPurchased(skuDetails.first()) == PurchasedResult.YES )
+                override fun onProductsFetched(@NonNull productDetails: List<ProductInfo>) {
+                    if ( billingConnector.isPurchased(productDetails.first()) == PurchasedResult.YES )
                         activity.lifecycleScope.launch {
                             ZenCryptSettingsModel.isProUser.update(true)
                         }
                 }
 
-                override fun onPurchasedProductsFetched(skuType: SkuType, purchases: MutableList<PurchaseInfo>) {
+                override fun onPurchasedProductsFetched(productType: ProductType, purchases: MutableList<PurchaseInfo>) {
                     //nothing to do here...
                 }
 
@@ -84,7 +84,7 @@ class IapHelper {
                     when (response.errorType) {
                         ErrorType.CLIENT_NOT_READY -> { }
                         ErrorType.CLIENT_DISCONNECTED -> { }
-                        ErrorType.SKU_NOT_EXIST -> { }
+                        ErrorType.PRODUCT_NOT_EXIST -> { }
                         ErrorType.CONSUME_ERROR -> { }
                         ErrorType.ACKNOWLEDGE_ERROR -> {
                             activity.lifecycleScope.launch {

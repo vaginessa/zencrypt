@@ -158,7 +158,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 badge = "PRO".asBatch()
                 canChange = {
                     if ( !ZenCryptSettingsModel.isProUser.value )
-                        SnackBarHelper.showSnackBarError(getString(R.string.zencrypt_pro_is_required))
+                        SnackBarHelper.showSnackBarBuyPro()
                     ZenCryptSettingsModel.isProUser.value
                 }
                 onChanged = {
@@ -217,7 +217,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 badge = "PRO".asBatch()
                 canChange = {
                     if ( !ZenCryptSettingsModel.isProUser.value )
-                        SnackBarHelper.showSnackBarError(getString(R.string.zencrypt_pro_is_required))
+                        SnackBarHelper.showSnackBarBuyPro()
                     ZenCryptSettingsModel.isProUser.value
                 }
                 onChanged = {
@@ -288,7 +288,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     selectorIntent.data = Uri.parse("mailto:")
 
                     val emailIntent = Intent(Intent.ACTION_SEND)
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("oz.zencrypt@mail.com"))
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("oz.zencrypt@gmail.com"))
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "ZenCrypt Feedback")
                     emailIntent.selector = selectorIntent
 
@@ -302,7 +302,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 icon = R.drawable.gitlab.asIcon()
                 onClick = {
                     try {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://gitlab.com/Kelsios/zencrypt")))
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://gitlab.com/o.zestas/zencrypt")))
                     } catch (e: ActivityNotFoundException) {
                         SnackBarHelper.showSnackBarError("Cannot open link.")
                     }

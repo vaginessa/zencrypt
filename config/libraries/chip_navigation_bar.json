@@ -1,0 +1,15 @@
+{
+    "uniqueId": "com.ismaeldivita.chipnavigation",
+    "developers": [
+      {
+        "name": "Ismael Di Vita"
+      }
+    ],
+    "artifactVersion": "1.4.0",
+    "description": "A navigation bar widget inspired on Google Bottom Navigation mixed with Chips component.",
+    "name": "Chip Navigation Bar",
+    "website" : "https://github.com/ismaeldivita/chip-navigation-bar",
+    "licenses": [
+      "Apache-2.0"
+    ]
+  }

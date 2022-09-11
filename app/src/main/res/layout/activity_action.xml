@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:gravity="center"
     android:animateLayoutChanges="true"
@@ -72,6 +73,8 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15sp"
+                android:ellipsize="end"
+                android:maxLines="6"
                 android:padding="8dp"/>
 
         </LinearLayout>
@@ -159,14 +162,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="3"
             android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_ok"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
                 android:textColor="@color/ZenCryptPrimary"
@@ -178,9 +184,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_use_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
                 android:textColor="@color/ZenCryptPrimary"
@@ -191,10 +198,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_cancel"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 app:icon="@drawable/close"
                 app:iconTint="@color/red_active"
                 app:iconGravity="textStart"
