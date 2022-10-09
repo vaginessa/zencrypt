@@ -6,24 +6,24 @@
         android:id="@+id/encrypted"
         android:icon="@drawable/lock_check"
         android:title="@string/encrypted"
-        app:cnb_iconColor="@color/green_active"/>
+        app:cnb_iconColor="?attr/btnTextColor"/>
 
     <item
         android:id="@+id/decrypted"
         android:icon="@drawable/lock_open_remove"
         android:title="@string/decrypted"
-        app:cnb_iconColor="@color/red_active"/>
+        app:cnb_iconColor="?attr/btnTextColor"/>
 
     <item
         android:id="@+id/pass_analysis"
         android:icon="@drawable/pencil_lock"
         android:title="@string/analyzer"
-        app:cnb_iconColor="@color/ZenCryptSecondaryDark"/>
+        app:cnb_iconColor="?attr/btnTextColor"/>
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/cog"
         android:title="@string/settings"
-        app:cnb_iconColor="@color/blue_grey_active" />
+        app:cnb_iconColor="?attr/btnTextColor"/>
 
 </menu>

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ExpandedAppBar" parent="@android:style/TextAppearance">
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Material.Title">
         <item name="android:textSize">32sp</item>
-        <item name="android:textColor">?attr/appBarTextColor</item>
     </style>
 
-    <style name="CollapsedAppBar" parent="@android:style/TextAppearance">
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Material.Title">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?attr/appBarTextColor</item>
     </style>
 
     <style name="ButtonColorDay" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/ZenCryptPrimary</item>
+        <item name="iconTint">@color/ZenCryptPrimary</item>
     </style>
 
     <style name="ButtonColorNight" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/ZenCryptSecondaryLight</item>
+        <item name="iconTint">@color/ZenCryptSecondaryLight</item>
     </style>
 
     <attr name="navMenuColor" format="reference"/>
 
+    <attr name="btnBackgroundTint" format="reference"/>
+    <attr name="btnTextColor" format="reference"/>
+
     <attr name="appBarTextColor" format="reference"/>
     <attr name="appBarTitleIcon" format="reference"/>
+    <attr name="appBarBackground" format="reference"/>
 
     <attr name="chevron_drawable" format="reference"/>
 

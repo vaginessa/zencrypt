@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         card_view:icon="@drawable/lock_plus_outline"
-                        card_view:iconTint="@color/ZenCryptPrimary"
+                        card_view:iconTint="?attr/btnTextColor"
                         android:foreground="?selectableItemBackground"
                         android:background="@android:color/transparent" />
 
@@ -112,7 +112,7 @@
                         card_view:layout_anchorGravity="left"
                         android:layout_gravity="left"
                         card_view:icon="@drawable/open_in_new"
-                        card_view:iconTint="@color/ZenCryptPrimary"
+                        card_view:iconTint="?attr/btnTextColor"
                         android:foreground="?selectableItemBackground"
                         android:background="@android:color/transparent" />
 
@@ -125,7 +125,7 @@
                         card_view:layout_anchorGravity="left"
                         android:layout_gravity="left"
                         card_view:icon="@drawable/pencil"
-                        card_view:iconTint="@color/ZenCryptPrimary"
+                        card_view:iconTint="?attr/btnTextColor"
                         android:foreground="?selectableItemBackground"
                         android:background="@android:color/transparent" />
 
@@ -138,7 +138,7 @@
                         card_view:layout_anchorGravity="left"
                         android:layout_gravity="left"
                         card_view:icon="@drawable/trash_can_outline"
-                        card_view:iconTint="@color/ZenCryptPrimary"
+                        card_view:iconTint="?attr/btnTextColor"
                         android:foreground="?selectableItemBackground"
                         android:background="@android:color/transparent" />
 

@@ -6,6 +6,6 @@
         android:gravity="center"
         android:height="140dp"
         android:width="140dp"
-        android:drawable="@drawable/alpha_z_circle"/>
+        android:drawable="@drawable/alpha_z_circle_white"/>
 
 </layer-list>

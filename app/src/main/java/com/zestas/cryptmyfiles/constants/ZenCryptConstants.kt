@@ -1,6 +1,7 @@
 package com.zestas.cryptmyfiles.constants
 
 import android.app.Activity
+import android.content.Context
 import java.io.File
 
 class ZenCryptConstants {
@@ -22,12 +23,12 @@ class ZenCryptConstants {
         const val REPLACE_CODE = "REPLACE_CODE"
 
 
-        fun encryptedFilesDir(activity: Activity): File {
-            return activity.getExternalFilesDir(File.separator + ENCRYPTED)!!
+        fun encryptedFilesDir(context: Context): File {
+            return context.getExternalFilesDir(File.separator + ENCRYPTED)!!
         }
 
-        fun decryptedFilesDir(activity: Activity): File {
-            return activity.getExternalFilesDir(File.separator + DECRYPTED)!!
+        fun decryptedFilesDir(context: Context): File {
+            return context.getExternalFilesDir(File.separator + DECRYPTED)!!
         }
     }
 }

@@ -83,7 +83,7 @@
         <entry key="app/src/main/res/drawable/test_title_logo.xml" value="0.43697916666666664" />
         <entry key="app/src/main/res/drawable/trash_can_outline.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/layout/activity_action.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2726449275362319" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_pick_file.xml" value="0.4107789855072464" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.36367753623188404" />
         <entry key="app/src/main/res/layout/decrypted_file_item_cardview.xml" value="0.4071557971014493" />
@@ -96,6 +96,7 @@
         <entry key="app/src/main/res/layout/indeterminate_progress_circular.xml" value="0.42083333333333334" />
         <entry key="app/src/main/res/layout/layout_collapsed_view.xml" value="0.384963768115942" />
         <entry key="app/src/main/res/layout/layout_expanded_view.xml" value="0.384963768115942" />
+        <entry key="app/src/main/res/menu/action_menu.xml" value="0.18888888888888888" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.42083333333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/launcher_icon.xml" value="0.4359375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/launcher_icon_round.xml" value="0.4359375" />

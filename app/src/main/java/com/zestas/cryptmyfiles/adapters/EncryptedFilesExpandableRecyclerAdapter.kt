@@ -1,6 +1,7 @@
 package com.zestas.cryptmyfiles.adapters
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -21,10 +22,10 @@ import com.zestas.cryptmyfiles.activities.ActionActivity
 import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.dataItemModels.FileItem
 import com.zestas.cryptmyfiles.helpers.FileActionsHelper
-import com.zestas.cryptmyfiles.helpers.SnackBarHelper
+import com.zestas.cryptmyfiles.helpers.ui.SnackBarHelper
 
 
-class EncryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) :
+class EncryptedFilesExpandableRecyclerAdapter(private var data: List<FileItem>) :
     RecyclerView.Adapter<EncryptedFilesExpandableRecyclerAdapter.ViewHolder>() {
     private val expandState: SparseBooleanArray = SparseBooleanArray()
     private var context: Context? = null
@@ -126,6 +127,12 @@ class EncryptedFilesExpandableRecyclerAdapter(private val data: List<FileItem>) 
         animator.duration = 300
         animator.interpolator = LinearInterpolator()
         return animator
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterFileList(filterList: List<FileItem>) {
+        data = filterList
+        notifyDataSetChanged()
     }
 
     init {

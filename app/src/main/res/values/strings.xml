@@ -14,6 +14,8 @@
     <string name="share">Share</string>
     <string name="delete">Delete</string>
     <string name="rename">Rename</string>
+    <string name="search">Search</string>
+    <string name="search_description">Search files</string>
     <string name="please_enter_file_name_without_extension">Please enter the new file name without extension.</string>
     <string name="confirm_deletion">Confirm Deletion</string>
     <string name="password">Password</string>
@@ -78,7 +80,15 @@
         and has no internet connection permission (except for google play billing library, which is required for purchasing pro version). You can check the encryption library\'s
         source code below. Credits go to Priyank Vasa (EasyCrypt) on Github.</string>
 
-    <string name="zencrypt_changelog"><![CDATA[&#9874; ZenCrypt v3.4<br/>
+    <string name="zencrypt_changelog"><![CDATA[&#9874; ZenCrypt v3.5<br/>
+        <br/>&#10148; Fixed APK size increase.
+        <br/>&#10148; Added the ability to search stored files.
+        <br/>&#10148; Revamped UI to follow material 3 guidelines.
+        <br/>&#10148; Android 13 support.
+        <br/>&#10148; Build tools and plugins updated.
+        <br/>&#10148; Libraries updated.
+        <br/>&#10148; Important bug fixes and code maintenance.
+        <br/><br/>&#9874; ZenCrypt v3.4<br/>
         <br/>&#10148; Multiple file selection for encryption now available (Pro).
         <br/>&#10148; Rare layout bug where buttons were not clickable fixed.
         <br/>&#10148; Some UI changes.

@@ -10,9 +10,16 @@
     <color name="ZenCryptFabActionColor">#5bb8fc</color>
     <color name="ZenCryptFabActionRipple">#e6ffff</color>
     <color name="ZenCryptSecondaryLight">#009de6</color>
-    <color name="ZenCryptSecondaryDark">#80d7ff</color>
+    <color name="ZenCryptSecondaryDark">#5bb8fc</color> <!-- #80d7ff-->
     <color name="fabMenuColorLight">#333333</color>
     <color name="darkMenuBarColor">#141414</color>
+    <color name="lightMenuBarColor">#E7EDF5</color>
+    <color name="lightBackgroundColor">#F7F9FC</color>
+    <color name="lightBackgroundColorVariant">#DCEAF2</color>
+    <color name="darkBackgroundColor">#1C1B1F</color>
+    <color name="darkBackgroundColorVariant">#19242C</color>
+    <color name="nav_menu_light">#DFECF3</color>
+    <color name="nav_menu_dark">#19232B</color>
 
     <color name="red_active">#f44336</color>
     <color name="purple_active">#9c27b0</color>

@@ -32,7 +32,7 @@ import com.zestas.cryptmyfiles.dataItemModels.ZenCryptSettingsModel
 import com.zestas.cryptmyfiles.fragments.DecryptedViewFragment
 import com.zestas.cryptmyfiles.fragments.EncryptedViewFragment
 import com.zestas.cryptmyfiles.helpers.FragmentHelper
-import com.zestas.cryptmyfiles.helpers.SnackBarHelper
+import com.zestas.cryptmyfiles.helpers.ui.SnackBarHelper
 import dev.skomlach.biometric.compat.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ZenCrypt" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ZenCrypt" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/ZenCryptPrimary</item>
         <item name="colorPrimaryVariant">@color/ZenCryptDark</item>
@@ -10,10 +10,13 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
         <!-- Customize your theme here. -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="materialButtonStyle">@style/ButtonColorNight</item>
+        <item name="btnBackgroundTint">@color/darkBackgroundColorVariant</item>
+        <item name="btnTextColor">@color/ZenCryptSecondaryDark</item>
         <item name="encrypted_file_drawable">@drawable/shield_key_outline_white</item>
         <item name="decrypted_file_drawable">@drawable/file_remove_outline_white</item>
         <item name="fab_menu_labels_color">@color/white</item>
@@ -21,19 +24,24 @@
         <item name="fontFamily">@font/sf_pro_display_medium</item>
         <item name="info_icon_drawable">@drawable/info_outline</item>
         <item name="chevron_drawable">@drawable/chevron_down_white</item>
-        <item name="android:navigationBarColor">@color/darkMenuBarColor</item>
+        <item name="android:navigationBarColor">@color/nav_menu_dark</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
         <!-- colors for appbar layout day/night -->
         <item name="appBarTextColor">@android:color/black</item>
-        <item name="appBarTitleIcon">@drawable/alpha_z_circle_black</item>
+        <item name="appBarTitleIcon">@drawable/alpha_z_circle_dark</item>
+        <item name="appBarBackground">@color/darkBackgroundColor</item>
         <!-- nav menu color -->
-        <item name="navMenuColor">@color/darkMenuBarColor</item>
+        <item name="navMenuColor">@color/nav_menu_dark</item>
         <!-- fix for MIUI force dark -->
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <!-- background colors as per material3 -->
+        <item name="android:colorBackground">@color/darkBackgroundColor</item>
+        <item name="colorSurface">@color/darkBackgroundColor</item>
+        <item name="colorSurfaceVariant">@color/darkBackgroundColorVariant</item>
     </style>
 
 
-    <style name="AlertDialogCustom" parent="Theme.MaterialComponents.DayNight.Dialog">
+    <style name="AlertDialogCustom" parent="Theme.Material3.Dark.Dialog">
 <!--        &lt;!&ndash; Used for the title and text &ndash;&gt;
         <item name="android:textColor">@color/colorPrimary</item>
         &lt;!&ndash; Used for the background &ndash;&gt;
@@ -45,18 +53,24 @@
         <item name="windowActionBar">false</item>
         <item name="dialogCornerRadius">14dp</item>
         <item name="windowNoTitle">true</item>
+        <item name="btnTextColor">@color/ZenCryptSecondaryDark</item>
+        <item name="colorPrimary">@color/ZenCryptSecondaryLight</item>
+        <item name="colorAccent">@color/ZenCryptSecondaryLight</item>
+        <!-- background colors as per material3 -->
+        <item name="colorSurface">@color/ZenCryptSecondaryLight</item>
+        <item name="android:colorBackground">@color/darkBackgroundColorVariant</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="SplashTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/ZenCryptPrimary</item>
-        <item name="android:statusBarColor">@color/ZenCryptDark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/ZenCryptDark</item>
     </style>
 
-    <style name="ToggleButtonWithIconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="ToggleButtonWithIconOnly" parent="Widget.Material3.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>

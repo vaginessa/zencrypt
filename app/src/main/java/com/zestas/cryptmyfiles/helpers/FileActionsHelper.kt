@@ -11,6 +11,7 @@ import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.fragments.DecryptedViewFragment
 import com.zestas.cryptmyfiles.fragments.EncryptedViewFragment
+import com.zestas.cryptmyfiles.helpers.ui.SnackBarHelper
 import java.io.File
 
 
@@ -25,7 +26,7 @@ class FileActionsHelper {
         fun showFileDeleteConfirmDialog(file: File, replaceWith: Int) {
             val name = file.name
             val title = mActivity.getString(R.string.confirm_deletion)
-            val dialog = AlertDialog.Builder(mActivity)
+            val dialog = AlertDialog.Builder(mActivity, R.style.AlertDialogCustom)
             dialog.setTitle(title)
             dialog.setMessage("Are you sure you want to delete:\n$name")
             dialog.setNegativeButton("No") { dia, _ -> dia.cancel() }
@@ -68,8 +69,8 @@ class FileActionsHelper {
                     R.color.text_input_color_selector
                 )
             )
-            textInputLayout.boxBackgroundColor =
-                MaterialColors.getColor(textInputLayout, R.attr.navMenuColor)
+//            textInputLayout.boxBackgroundColor =
+//                MaterialColors.getColor(textInputLayout, R.attr.navMenuColor)
             textInputLayout.boxBackgroundMode = TextInputLayout.BOX_BACKGROUND_OUTLINE
             textInputLayout.setBoxCornerRadii(
                 14F,
@@ -84,7 +85,7 @@ class FileActionsHelper {
             val renameString = mActivity.getString(R.string.rename)
             val message = mActivity.getString(R.string.please_enter_file_name_without_extension)
 
-            val alert = AlertDialog.Builder(mActivity)
+            val alert = AlertDialog.Builder(mActivity, R.style.AlertDialogCustom)
                 .setTitle(renameString)
                 .setView(textInputLayout)
                 .setMessage(message)

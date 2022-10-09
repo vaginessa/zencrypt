@@ -138,7 +138,7 @@
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopStart="8dp"
-            app:hintTextColor="@color/ZenCryptPrimary"
+            app:hintTextColor="?attr/btnTextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -146,8 +146,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             app:passwordToggleEnabled="true"
-            app:boxStrokeColor="@color/ZenCryptPrimary"
-            app:passwordToggleTint="@color/ZenCryptPrimary">
+            app:boxStrokeColor="?attr/btnTextColor"
+            app:passwordToggleTint="?attr/btnTextColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tvPassword"
@@ -175,9 +175,9 @@
                 android:layout_marginBottom="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
-                android:textColor="@color/ZenCryptPrimary"
+                android:textColor="?attr/btnTextColor"
                 app:icon="@drawable/ic_baseline_fingerprint_24"
-                app:iconTint="@color/ZenCryptPrimary"
+                app:iconTint="?attr/btnTextColor"
                 app:iconGravity="textStart"
                 android:text="@string/fingerprint" />
 
@@ -190,9 +190,9 @@
                 android:layout_marginBottom="5dp"
                 android:foreground="?selectableItemBackground"
                 android:background="@android:color/transparent"
-                android:textColor="@color/ZenCryptPrimary"
+                android:textColor="?attr/btnTextColor"
                 app:icon="@drawable/key_outline"
-                app:iconTint="@color/ZenCryptPrimary"
+                app:iconTint="?attr/btnTextColor"
                 app:iconGravity="textStart"
                 android:text="@string/password" />
 

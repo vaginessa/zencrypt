@@ -1,24 +1,21 @@
 package com.zestas.cryptmyfiles.fragments
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.michaelflisar.materialpreferences.core.interfaces.StorageSetting
 import com.michaelflisar.materialpreferences.preferencescreen.*
+import com.michaelflisar.materialpreferences.preferencescreen.bool.switch
 import com.michaelflisar.materialpreferences.preferencescreen.classes.Badge
 import com.michaelflisar.materialpreferences.preferencescreen.classes.asBatch
 import com.michaelflisar.materialpreferences.preferencescreen.classes.asIcon
@@ -30,11 +27,10 @@ import com.michaelflisar.text.asText
 import com.zestas.cryptmyfiles.activities.MainActivity
 import com.zestas.cryptmyfiles.R
 import com.zestas.cryptmyfiles.activities.AboutActivity
-import com.zestas.cryptmyfiles.constants.ZenCryptConstants
 import com.zestas.cryptmyfiles.databinding.FragmentSettingsBinding
 import com.zestas.cryptmyfiles.dataItemModels.ZenCryptSettingsModel
 import com.zestas.cryptmyfiles.helpers.IapHelper
-import com.zestas.cryptmyfiles.helpers.SnackBarHelper
+import com.zestas.cryptmyfiles.helpers.ui.SnackBarHelper
 import dev.skomlach.biometric.compat.*
 import games.moisoni.google_iab.BillingConnector
 import kotlinx.coroutines.Dispatchers
@@ -49,25 +45,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private val regexWithDot: Regex = "^\\.(([a-z]|[A-Z])+)\$".toRegex()
     private val regexWithoutDot: Regex = "^(([a-z]|[A-Z])+)\$".toRegex()
-
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //binding = FragmentSettingsBinding.inflate(layoutInflater)
-        preferenceScreen = initSettings(savedInstanceState)
-    }*/
-
-/*    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        *//*val v = inflater.inflate(R.layout.fragment_settings, container, false)*//*
-*//*        val v = inflater.inflate(R.layout.activity_main, container, false)
-        test = v.findViewById(R.id.fab_menu)*//*
-
-        return binding.root
-    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -223,8 +200,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 onChanged = {
                     if (it) SnackBarHelper.showSnackBarInfo(getString(R.string.set_a_custom_password_below))
                 }
-                dependsOn = object : Dependency<Boolean> {
-                    override suspend fun isEnabled(): Boolean {
+                enabledDependsOn = object : Dependency<Boolean> {
+                    override suspend fun state(): Boolean {
                         return BiometricManagerCompat.isHardwareDetected(BiometricAuthRequest(
                             BiometricApi.AUTO, BiometricType.BIOMETRIC_FINGERPRINT))
                     }
@@ -239,7 +216,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 icon = R.drawable.ic_baseline_textbox_password.asIcon()
                 summary = getString(R.string.any_password_is_valid).asText()
                 hint = getString(R.string.enter_a_password).asText()
-                dependsOn = ZenCryptSettingsModel.fingerprint_auth.asDependency()
+                enabledDependsOn = ZenCryptSettingsModel.fingerprint_auth.asDependency()
                 onChanged = {
                     lifecycleScope.launch(Dispatchers.IO)  {
                         //check if password is empty
@@ -320,7 +297,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
 
         }
-        screen.bind(binding.rvSettings)
+        screen.bind(binding.rvSettings, this)
         return screen
     }
 

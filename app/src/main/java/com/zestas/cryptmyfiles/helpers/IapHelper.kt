@@ -1,11 +1,11 @@
 package com.zestas.cryptmyfiles.helpers
 
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.zestas.cryptmyfiles.BuildConfig
 import com.zestas.cryptmyfiles.dataItemModels.ZenCryptSettingsModel
 import com.zestas.cryptmyfiles.fragments.SettingsFragment
+import com.zestas.cryptmyfiles.helpers.ui.SnackBarHelper
 import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
 import games.moisoni.google_iab.enums.ErrorType
@@ -29,7 +29,7 @@ class IapHelper {
                 .connect() //to connect billing client with Play Console
 
             billingConnector.setBillingEventListener(object : BillingEventListener {
-                override fun onProductsFetched(@NonNull productDetails: List<ProductInfo>) {
+                override fun onProductsFetched(productDetails: List<ProductInfo>) {
                     if ( billingConnector.isPurchased(productDetails.first()) == PurchasedResult.YES )
                         activity.lifecycleScope.launch {
                             ZenCryptSettingsModel.isProUser.update(true)
@@ -40,7 +40,7 @@ class IapHelper {
                     //nothing to do here...
                 }
 
-                override fun onProductsPurchased(@NonNull purchases: List<PurchaseInfo>) {
+                override fun onProductsPurchased(purchases: List<PurchaseInfo>) {
                     activity.lifecycleScope.launch {
                         ZenCryptSettingsModel.isProUser.update(true)
                     }
@@ -49,7 +49,7 @@ class IapHelper {
 
                 }
 
-                override fun onPurchaseAcknowledged(@NonNull purchase: PurchaseInfo) {
+                override fun onPurchaseAcknowledged(purchase: PurchaseInfo) {
                     /*Callback after a purchase is acknowledged*/
 
                     /*
@@ -68,7 +68,7 @@ class IapHelper {
                     }
                 }
 
-                override fun onPurchaseConsumed(@NonNull purchase: PurchaseInfo) {
+                override fun onPurchaseConsumed(purchase: PurchaseInfo) {
                     /*Callback after a purchase is consumed*/
 
                     /*
@@ -77,8 +77,8 @@ class IapHelper {
                 }
 
                 override fun onBillingError(
-                    @NonNull billingConnector: BillingConnector,
-                    @NonNull response: BillingResponse
+                    billingConnector: BillingConnector,
+                    response: BillingResponse
                 ) {
                     /*Callback after an error occurs*/
                     when (response.errorType) {

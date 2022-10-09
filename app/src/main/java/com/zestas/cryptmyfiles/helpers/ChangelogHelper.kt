@@ -17,7 +17,7 @@ class ChangelogHelper {
             if (ZenCryptSettingsModel.versionCode.value < BuildConfig.VERSION_CODE) {
                 //clear cache first
                 activity.cacheDir.deleteRecursively()
-                val builder = AlertDialog.Builder(activity)
+                val builder = AlertDialog.Builder(activity, R.style.AlertDialogCustom)
                 builder.setTitle("Changelog")
                 builder.setCancelable(false)
                 builder.setMessage(
