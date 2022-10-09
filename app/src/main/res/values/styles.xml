@@ -21,6 +21,8 @@
 
     <attr name="navMenuColor" format="reference"/>
 
+    <attr name="cardViewBackgroundColor" format="reference"/>
+
     <attr name="btnBackgroundTint" format="reference"/>
     <attr name="btnTextColor" format="reference"/>
 

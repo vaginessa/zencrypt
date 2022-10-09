@@ -15,6 +15,7 @@ import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -158,6 +159,15 @@ class ActionActivity: AppCompatActivity(), ECResultListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_action)
         setFinishOnTouchOutside(false)
+
+        onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true) {
+            /* override back pressing */
+            override fun handleOnBackPressed() {
+                if (filesToProcess == 0)
+                    finish()
+                //else nothing so dialog is not cancellable
+            }
+        })
 
         intentAction = intent.extras?.getInt(ZenCryptConstants.ACTION_CODE)!!
         intentRequestCode = intent.extras?.getInt(ZenCryptConstants.REQUEST_CODE)!!

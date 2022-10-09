@@ -17,6 +17,7 @@
         <item name="materialButtonStyle">@style/ButtonColorNight</item>
         <item name="btnBackgroundTint">@color/darkBackgroundColorVariant</item>
         <item name="btnTextColor">@color/ZenCryptSecondaryDark</item>
+        <item name="cardViewBackgroundColor">@color/darkBackgroundColorVariant</item>
         <item name="encrypted_file_drawable">@drawable/shield_key_outline_white</item>
         <item name="decrypted_file_drawable">@drawable/file_remove_outline_white</item>
         <item name="fab_menu_labels_color">@color/white</item>
@@ -38,6 +39,7 @@
         <item name="android:colorBackground">@color/darkBackgroundColor</item>
         <item name="colorSurface">@color/darkBackgroundColor</item>
         <item name="colorSurfaceVariant">@color/darkBackgroundColorVariant</item>
+        <item name="colorPrimaryContainer">@color/ZenCryptDark</item>
     </style>
 
 

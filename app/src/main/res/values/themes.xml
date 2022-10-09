@@ -17,6 +17,7 @@
         <item name="materialButtonStyle">@style/ButtonColorDay</item>
         <item name="btnBackgroundTint">@color/lightBackgroundColor</item>
         <item name="btnTextColor">@color/ZenCryptPrimary</item>
+        <item name="cardViewBackgroundColor">@color/white</item>
         <item name="encrypted_file_drawable">@drawable/shield_key_outline</item>
         <item name="decrypted_file_drawable">@drawable/file_remove_outline</item>
         <item name="fab_menu_labels_color">@color/fabMenuColorLight</item>

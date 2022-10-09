@@ -19,7 +19,7 @@ android {
         applicationId "com.zestas.cryptmyfiles"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 200
+        versionCode 201
         versionName "3.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
